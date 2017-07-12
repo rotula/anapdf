@@ -1,0 +1,25 @@
+********************
+Changelog for anapdf
+********************
+
+0.2.1 (2017-01-30)
+==================
+
+- Bugfix: fontenc.py did not take into account the font metric
+  information in front of the character table (with the result that no
+  corrections were being applied to the encoding)
+
+0.2.0 (2016-09-17)
+==================
+
+- Added some font metrics information to the font extraction HTML.
+- Added TOC at the top of the font extraction HTML.
+- Base calculation of superscript on characters origin property,
+  not the bounding box of the character.
+- Use ``msize`` property.
+
+0.1.0 (2016-08-08)
+==================
+
+Initial release.
+

@@ -1,0 +1,86 @@
+# -*- coding: UTF-8 -*-
+
+"""
+anapdf
+"""
+
+import argparse
+
+import anapdf
+
+def main():
+    """Open PDF files and extract some analytical information"""
+    description = "Open PDF files and extract some analytical information"
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument(
+            "pdffile",
+            metavar="PDFFILE",
+            type=str,
+            help=u"the PDF file to analyze")
+    parser.add_argument(
+            "-i",
+            "--images",
+            help=u"directory where images will be stored",
+            default="imdir",
+            type=str,
+            dest="imdir",
+            metavar="IMAGEDIR")
+    parser.add_argument(
+            "-f",
+            "--fontdir",
+            help=u"directory where font information will be stored",
+            default="fonts",
+            type=str,
+            dest="fontdir",
+            metavar="FONTDIR")
+    parser.add_argument(
+            "-r",
+            "--res",
+            "--resolution",
+            help=u"resolution of created images in dpi (defaults to 300)",
+            default=300,
+            type=int,
+            dest="resolution",
+            metavar="RESOLUTION")
+    parser.add_argument(
+            "-v",
+            "--version",
+            action="version",
+            version="%(prog)s {version}".format(version=anapdf.__version__))
+    parser.add_argument(
+            "-s",
+            "--skip-images",
+            help=u"skip image creation",
+            default=True,
+            action="store_false",
+            dest="make_images")
+    parser.add_argument(
+            "-x",
+            "--no-xml",
+            "--noxml",
+            help=u"skip xml extraction",
+            default=True,
+            action="store_false",
+            dest="extract_xml_data")
+    parser.add_argument(
+            "-c",
+            "--corr",
+            "--corrector",
+            help=u"filename of module containing FontCorrector loader",
+            default=None,
+            dest="font_corrector_filename",
+            metavar="FC_CORRECTOR_LOADER")
+    args = parser.parse_args()
+    if args.font_corrector_filename:
+        import imp
+        fc_loader = imp.load_source("fc_loader", args.font_corrector_filename)
+        font_correctors = fc_loader.fc_loader()
+        args = vars(args)
+        args["font_correctors"] = font_correctors
+    else:
+        args = vars(args)
+    a = anapdf.Analyzer(**args)
+    a.analyze()
+
+if __name__ == "__main__":
+    main()
