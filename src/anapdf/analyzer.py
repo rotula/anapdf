@@ -9,7 +9,8 @@ import os.path
 import logging
 
 from lxml import etree as et
-from pdfimages import PDFImagesDocument
+# from pdfimages import PDFImagesDocument
+import fitz
 from PIL import Image, ImageDraw
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import XMLConverter
@@ -103,12 +104,26 @@ class Analyzer(object):
 
     def images(self):
         """Create the images"""
-        pdf = PDFImagesDocument(self.pdffile)
-        num_pages = pdf.count_pages()
+        # pdf = PDFImagesDocument(self.pdffile)
+        pdf = fitz.open(self.pdffile)
+        # num_pages = pdf.count_pages()
+        num_pages = pdf.pageCount
         cnt = 1
         for idx in range(0, num_pages):
-            imdata = pdf.get_image_data(idx, self.resolution)
-            im = Image.frombytes(imdata["mode"], imdata["size"], imdata["data"])
+            imdata = pdf.getPagePixmap(
+                    idx,
+                    matrix=fitz.Matrix(
+                        float(self.resolution)/72,
+                        float(self.resolution)/72
+                    ),
+                    colorspace="RGB",
+                    alpha=False
+                )
+            im = Image.frombytes(
+                    "RGB",
+                    [imdata.w, imdata.h],
+                    imdata.samples
+                )
             basename = os.path.splitext(os.path.basename(self.pdffile))[0]
             name = "{}_{:05d}.jpg".format(basename, cnt)
             name = os.path.join(self.imdir, name)

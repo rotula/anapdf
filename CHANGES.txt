@@ -2,6 +2,12 @@
 Changelog for anapdf
 ********************
 
+0.2.2 (2017-07-12)
+==================
+
+- change dependency to pdfminer.six-mgh
+- use pymupdf (fitz) instead of my own pdfimages for image extraction
+
 0.2.1 (2017-01-30)
 ==================
 

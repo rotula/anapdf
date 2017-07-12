@@ -37,9 +37,9 @@ setup_args = dict(
         install_requires=[
             "lxml",
             "xmlhelper",
-            "pdfimages",
+            "fitz",
             "pillow",
-            "pdfminer-mgh>=20160916"],
+            "pdfminer.six-mgh>=20170531"],
         package_dir={"": "src"},
         packages=find_packages("src"),
         entry_points={"console_scripts":
