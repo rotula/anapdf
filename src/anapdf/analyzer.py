@@ -129,7 +129,7 @@ class Analyzer(object):
             name = os.path.join(self.imdir, name)
             im.save(name, dpi=(self.resolution, self.resolution), quality=85)
             if not(cnt % 10):
-                logging.info("  {}/{}".format(cnt + 1, num_pages))
+                logging.info("  %d/%d", cnt + 1, num_pages)
             cnt += 1
 
     def extract_fonts(self):
@@ -264,9 +264,10 @@ class Analyzer(object):
             os.makedirs(outdir)
         for p in pages.keys():
             basename = os.path.splitext(os.path.basename(self.pdffile))[0]
-            img = Image.open(
-                   os.path.join(
-                        self.imdir, "{}_{:05d}.jpg".format(basename, p)))
+            source_imgname = os.path.join(
+                self.imdir, "{}_{:05d}.jpg".format(basename, p)
+            )
+            img = Image.open(source_imgname)
             for imnum, bbox, linebox in pages[p]:
                 imgfilename = os.path.join(outdir, "outpic%d.jpg" % imnum)
                 box = [float(x) for x in bbox.split(",")]
@@ -275,8 +276,46 @@ class Analyzer(object):
                 box[1] = img.size[1] - box[3]
                 box[3] = tmp
                 box = [int(x) for x in box]
+                # Problem with some combining diacritical characters
+                # in Junicode font: they seem to have to vertical
+                # extension, thus x1 and x2 are the same. This leads
+                # to problems with the cropbox. Thus: if x- or y-values
+                # are the same, we extend the cropbox.
+                oldbox = None
+                if box[0] == box[2]:
+                    oldbox = [x for x in box]
+                    box[0] -= 5
+                    box[2] += 5
+                    if box[0] < 0:
+                        box[0] = 0
+                if box[1] == box[3]:
+                    if not oldbox:
+                        oldbox = [x for x in box]
+                    box[1] -= 5
+                    box[3] += 5
+                    if box[1] < 0:
+                        box[1] = 0
+                if oldbox:
+                    logging.info("Corrected cropbox %s --> %s",
+                        oldbox,
+                        box
+                    )
                 img2 = img.crop(box)
-                img2.save(imgfilename)
+                try:
+                    img2.save(imgfilename)
+                except (SystemError,), syserr:
+                    logging.error(
+                        ("%s: imagefilename: %s, box: %s, img: %s,"
+                         "bbox: %s, size: (%d, %d)"),
+                        syserr,
+                        imgfilename,
+                        box,
+                        source_imgname,
+                        bbox,
+                        img.size[0],
+                        img.size[1]
+                    )
+                    raise
                 del img2
                 imgfilename = os.path.join(outdir, "linepic%d.jpg" % imnum)
                 box2 = [float(x) for x in linebox.split(",")]

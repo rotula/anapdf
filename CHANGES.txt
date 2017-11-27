@@ -2,6 +2,13 @@
 Changelog for anapdf
 ********************
 
+0.2.3 (@@@@-@@-@@)
+==================
+
+- BUGFIX: program crashes when cropbox for single character has no
+  horizontal or vertical extension
+- added option -d, --debug to allow for more logging information
+
 0.2.2 (2017-07-12)
 ==================
 

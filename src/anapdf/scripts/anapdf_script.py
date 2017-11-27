@@ -5,6 +5,7 @@ anapdf
 """
 
 import argparse
+import logging
 
 import anapdf
 
@@ -17,6 +18,13 @@ def main():
             metavar="PDFFILE",
             type=str,
             help=u"the PDF file to analyze")
+    parser.add_argument(
+            "-d",
+            "--debug",
+            help=u"log some debugging information",
+            default=False,
+            action="store_true",
+            dest="b_debug")
     parser.add_argument(
             "-i",
             "--images",
@@ -71,6 +79,10 @@ def main():
             dest="font_corrector_filename",
             metavar="FC_CORRECTOR_LOADER")
     args = parser.parse_args()
+    if args.b_debug:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
     if args.font_corrector_filename:
         import imp
         fc_loader = imp.load_source("fc_loader", args.font_corrector_filename)
