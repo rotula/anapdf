@@ -37,7 +37,8 @@ setup_args = dict(
         install_requires=[
             "lxml",
             "xmlhelper",
-            "fitz",
+            # "fitz",
+            "PyMuPDF",
             "pillow",
             "pdfminer.six-mgh>=20170531"],
         package_dir={"": "src"},
