@@ -20,7 +20,11 @@ class Style(object):
     italics = False
     smallcaps = False
 
-    _size_tolerance = 0.10  # size tolerance as factor
+    # _size_tolerance = 0.1  # size tolerance as factor
+    # NB: This used to be a lot higher (0.1), but as a
+    # result of better pdfminer size extraction, we use
+    # a very small tolerance.
+    _size_tolerance = 0.01  # size tolerance as factor
 
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
