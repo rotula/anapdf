@@ -33,7 +33,7 @@ def main():
             "--fontencfile",
             help=u"font re-encoding file (usually ``index.htm`` resulting "\
                     u"from an ``anapdf`` run), if none is given, the "\
-                    u"the characters will remain the same as in the PDF/XML",
+                    u"characters will remain the same as in the PDF/XML",
             default="",
             type=str,
             dest="fontencfile",
