@@ -649,6 +649,15 @@ class TEIConverter(Converter):
                 caching=True, font_correctors=self.font_correctors)
         laparams = LAParams()
         outfp = StringIO.StringIO()
+        # Actually ``StringIO()`` has no mode, but in Python 2
+        # it is basically a binary object. PDFMiner tries to determine
+        # the mode of the file pointer by first looking at the ``mode``
+        # attribute. If this is not present, as a last resort, a Unicode
+        # letter will be written to the file pointer in order to determine
+        # the treatment of binary data. Unfortunately, this test character
+        # messes up the final XML. Thus we add the mode to ``outfp``.
+        # See pdfminer.PDFConverter for details.
+        outfp.mode = "b"
         device = XMLConverter(rm, outfp, codec="UTF-8", laparams=laparams,
                 imagewriter=None)
         interpreter = PDFPageInterpreter(rm, device)
@@ -681,6 +690,8 @@ class MyFile(object):
     """
 
     filebuffer = []
+    #: classify this as a binary file
+    mode = "b"
 
     def write(self, s):
         self.filebuffer.append(s)
