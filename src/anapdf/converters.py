@@ -480,7 +480,26 @@ class TEIConverter(Converter):
                 # elif size == self.current_size and wordsize < self.current_size:
                 elif size == self.current_size and charsizes == self.MIXED:
                     # This seems to be a mixed word.
-                    c.text = c.text.upper()
+                    # @@@TODO:
+                    # In some cases this leads to an erroneous transformation
+                    # to upper case. Tests with the latest DA file (DA 73,2)
+                    # indicate that this particular adjustment is not needed
+                    # any more. But this needs more testing with older/other
+                    # files.
+                    # For the time being we emit a warning message, but refuse
+                    # to change the character. Maybe a test is in order, if
+                    # the current character value is from a replacement table.
+                    # If this is the case, then no conversion should be
+                    # performed.
+                    logging.warning(
+                        (u"Old algorithm suggests conversion to upper "
+                         "case (%s): font: %s, size: %s, cid: %s"),
+                        c.text,
+                        fontname,
+                        size,
+                        c.get("cid", "-1")
+                    )
+                    # c.text = c.text.upper()
             if style.smallcaps:
                 # c.set("size", str(self.current_size))
                 c.set("msize", str(self.current_size))
@@ -557,7 +576,7 @@ class TEIConverter(Converter):
         # @@@TODO:
         # Make sure that the majority wins, but if there are two
         # or more sizes with equal number of occurrences, the
-        # smalles size should win.
+        # smallest size should win.
         return (sizelist[0][1], self.MIXED if len(sizes) > 1 else self.CLEAN)
 
     def guess_styles_from_fontname(self, fontname):

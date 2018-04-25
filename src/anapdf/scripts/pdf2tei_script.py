@@ -12,6 +12,7 @@ PDFMiner's ``pdf2txt.py``.
 import sys
 import os.path
 import argparse
+import logging
 
 from lxml import etree as et
 
@@ -22,53 +23,71 @@ def main():
     description = "Convert PDF file to TEI XML."
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
-            "pdffile",
-            metavar="PDFFILE",
-            type=str,
-            help=u"the PDF file to analyze (or the XML resulting "\
-                    u"from a PDFMiner run)")
+        "pdffile",
+        metavar="PDFFILE",
+        type=str,
+        help=u"the PDF file to analyze (or the XML resulting "
+        u"from a PDFMiner run)"
+    )
     parser.add_argument(
-            "-f",
-            "--font",
-            "--fontencfile",
-            help=u"font re-encoding file (usually ``index.htm`` resulting "\
-                    u"from an ``anapdf`` run), if none is given, the "\
-                    u"characters will remain the same as in the PDF/XML",
-            default="",
-            type=str,
-            dest="fontencfile",
-            metavar="FONTENCODINGFILE")
+        "-f",
+        "--font",
+        "--fontencfile",
+        help=u"font re-encoding file (usually ``index.htm`` resulting "
+        u"from an ``anapdf`` run), if none is given, the "
+        u"characters will remain the same as in the PDF/XML",
+        default="",
+        type=str,
+        dest="fontencfile",
+        metavar="FONTENCODINGFILE"
+    )
     parser.add_argument(
-            "-o",
-            "--output",
-            help=u"if none given, append ``_tei`` to filename, "\
-                    u"if ``-``, print to stdout",
-            default="",
-            type=str,
-            dest="output",
-            metavar="OUTPUTFILE")
+        "-o",
+        "--output",
+        help=u"if none given, append ``_tei`` to filename, "
+        u"if ``-``, print to stdout",
+        default="",
+        type=str,
+        dest="output",
+        metavar="OUTPUTFILE"
+    )
     parser.add_argument(
-            "-s",
-            "--stop",
-            help=u"Stop after given number of pages (for debugging purposes)",
-            default=None,
-            dest="stop_after",
-            type=int,
-            metavar="STOPAFTER")
+        "-s",
+        "--stop",
+        help=u"Stop after given number of pages (for debugging purposes)",
+        default=None,
+        dest="stop_after",
+        type=int,
+        metavar="STOPAFTER"
+    )
     parser.add_argument(
-            "-v",
-            "--version",
-            action="version",
-            version="%(prog)s {version}".format(version=anapdf.__version__))
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s {version}".format(version=anapdf.__version__)
+    )
     parser.add_argument(
-            "-c",
-            "--corr",
-            "--corrector",
-            help=u"filename of module containing FontCorrector loader",
-            default=None,
-            dest="font_corrector_filename",
-            metavar="FC_CORRECTOR_LOADER")
+        "-c",
+        "--corr",
+        "--corrector",
+        help=u"filename of module containing FontCorrector loader",
+        default=None,
+        dest="font_corrector_filename",
+        metavar="FC_CORRECTOR_LOADER"
+    )
+    parser.add_argument(
+        "-l",
+        "--logging",
+        help=u"turn on more logging (INFO instead of WARNING)",
+        default=False,
+        dest="b_logging",
+        action="store_true"
+    )
     args = parser.parse_args()
+    if args.b_logging:
+        logging.basicConfig(level=logging.INFO)
+    else:
+        logging.basicConfig(level=logging.WARNING)
     font_correctors = []
     if args.font_corrector_filename:
         import imp
