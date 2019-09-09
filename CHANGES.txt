@@ -2,12 +2,14 @@
 Changelog for anapdf
 ********************
 
-0.2.3 (@@@@-@@-@@)
+0.2.3 (2019-09-09)
 ==================
 
 - BUGFIX: program crashes when cropbox for single character has no
   horizontal or vertical extension
 - added option -d, --debug to allow for more logging information
+- changed requirements in setup.py: fitz is now PyMuPDF
+  (somehow this change did not make it into the 0.2.2 release)
 
 0.2.2 (2017-07-12)
 ==================
