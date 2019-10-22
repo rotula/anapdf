@@ -285,7 +285,7 @@ class TEIConverter(Converter):
             if e.tag == "text":
                 txt = (e.text or "")
                 if txt == "":
-                    print("Empty text in line:\n  {}".format(
+                    print(u"Empty text in line:\n  {}".format(
                         xmlhelper.get_text(textline)).encode("UTF-8"))
                 elif txt.strip() == "":
                     # whitespace
@@ -568,7 +568,8 @@ class TEIConverter(Converter):
                 if size > 0.0:
                     sizes.update({size: sizes.get(size, 0) + 1})
         if len(sizes) == 0:
-            return 0.0
+            # return 0.0
+            return (0.0, self.CLEAN)
         sizelist = [(cnt, sz) for sz, cnt in sizes.items()]
         sizelist.sort(
                 cmp=lambda x,y: cmp((x[0],y[1]), (y[0],x[1])),
