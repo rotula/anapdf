@@ -2,6 +2,13 @@
 Changelog for anapdf
 ********************
 
+0.2.4 (@@@@-@@-@@)
+==================
+
+- BUGFIX: Unicode error in log message
+- BUGFIX: ``get_wordsize`` does not return tuple when there are
+  no sizes
+
 0.2.3 (2019-09-09)
 ==================
 
