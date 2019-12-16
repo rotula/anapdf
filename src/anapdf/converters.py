@@ -16,9 +16,9 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import XMLConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
+from simplestyle import styles
 
 from . import fontenc
-from . import styles
 
 ns = xmlhelper.ns
 tei = ns["tei"]
@@ -583,6 +583,10 @@ class TEIConverter(Converter):
     def guess_styles_from_fontname(self, fontname):
         """Try to make some assumptions about the style"""
         ret = styles.Style()
+        # NB: This used to be a lot higher (0.1), but as a
+        # result of better pdfminer size extraction, we use
+        # a very small tolerance.
+        ret.set_size_tolerance(0.01)
         if "SC" in fontname:
             # ret.append("sc")
             ret.smallcaps = True

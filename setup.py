@@ -39,7 +39,9 @@ setup_args = dict(
             "xmlhelper",
             "PyMuPDF",
             "pillow",
-            "pdfminer.six-mgh>=20170531"],
+            "pdfminer.six-mgh>=20170531",
+            "simplestyle>=1.1.0",
+        ],
         package_dir={"": "src"},
         packages=find_packages("src"),
         entry_points={"console_scripts":
