@@ -2,7 +2,7 @@
 Changelog for anapdf
 ********************
 
-0.2.4 (@@@@-@@-@@)
+0.2.4 (2019-12-16)
 ==================
 
 - BUGFIX: Unicode error in log message
