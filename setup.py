@@ -1,4 +1,3 @@
-
 # -*- coding: UTF-8 -*-
 
 """
@@ -8,15 +7,16 @@ Setup for anapdf
 import os.path
 from setuptools import setup
 from setuptools import find_packages
+from io import open
 
 here = os.path.abspath(os.path.dirname(__file__))
 
 long_description = u""
-with open(os.path.join(here, "README.rst"), "r") as f:
-    long_description = f.read().decode("UTF-8")
+with open(os.path.join(here, "README.rst"), "r", encoding="UTF-8") as f:
+    long_description = f.read()
 
 version = u""
-with open(os.path.join(here, "src", "anapdf", "__init__.py"), "r") as f:
+with open(os.path.join(here, "src", "anapdf", "__init__.py"), "r", encoding="UTF-8") as f:
     for line in f:
         if line.find("__version__") != -1:
             version = line.split("=")[1].strip()
@@ -37,7 +37,6 @@ setup_args = dict(
         install_requires=[
             "lxml",
             "xmlhelper",
-            # "fitz",
             "PyMuPDF",
             "pillow",
             "pdfminer.six-mgh>=20170531"],
