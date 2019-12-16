@@ -169,7 +169,7 @@ class Analyzer(object):
         for tl in doc.xpath("//textline"):
             for e in tl:
                 tags.add(e.tag)
-        fontnames = fonts.keys()
+        fontnames = list(fonts.keys())
         fontnames.sort()
         pages = {}
         # build toc
@@ -262,7 +262,7 @@ class Analyzer(object):
         outdir = os.path.join(self.fontdir, "pic")
         if not os.path.isdir(outdir):
             os.makedirs(outdir)
-        for p in pages.keys():
+        for p in list(pages.keys()):
             basename = os.path.splitext(os.path.basename(self.pdffile))[0]
             source_imgname = os.path.join(
                 self.imdir, "{}_{:05d}.jpg".format(basename, p)
@@ -303,7 +303,7 @@ class Analyzer(object):
                 img2 = img.crop(box)
                 try:
                     img2.save(imgfilename)
-                except (SystemError,), syserr:
+                except (SystemError,) as syserr:
                     logging.error(
                         ("%s: imagefilename: %s, box: %s, img: %s,"
                          "bbox: %s, size: (%d, %d)"),
@@ -363,12 +363,12 @@ class Analyzer(object):
             page.rotate = (page.rotate + rotation) % 360
             interpreter.process_page(page)
         self.font_metrics = {}
-        for font in rm._cached_fonts.values():
+        for font in list(rm._cached_fonts.values()):
             try:
                 self.font_metrics[font.fontname] = {"bbox": font.bbox,
                         "descent": font.descent}
             except AttributeError:
-                print(dir(font))
+                print((dir(font)))
         infile.close()
         device.close()
         outfp.close()

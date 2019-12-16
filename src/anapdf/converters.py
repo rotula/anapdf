@@ -7,7 +7,7 @@ Converter for PDF files
 
 import os.path
 import logging
-import StringIO
+import io
 
 from lxml import etree as et
 from lxml.builder import ElementMaker
@@ -97,7 +97,7 @@ class TEIConverter(Converter):
     def add_style(self, style):
         """Add a style to the dictionary, return style id."""
         styleid = None
-        for s, si in self.styles.items():
+        for s, si in list(self.styles.items()):
             if s == style:
                 styleid = si
         if styleid is None:
@@ -204,7 +204,7 @@ class TEIConverter(Converter):
             pass
         # now add styles
         td = self.teidoc.xpath("//tei:tagsDecl", namespaces=ns)[0]
-        for style, styleid in self.styles.items():
+        for style, styleid in list(self.styles.items()):
             rendition = T.rendition({
                 "{{{}}}id".format(xmlns): styleid,})
             rendition.tail = "\n"
@@ -260,7 +260,7 @@ class TEIConverter(Converter):
                 self.current_page_surface.append(zone)
                 xmlhelper.delat(e, "bbox")
             else:
-                print("Unexpected element {} in textbox".format(e.tag))
+                print(("Unexpected element {} in textbox".format(e.tag)))
 
     def _create_seg(self, segtype=None):
         """Helper to create a generic segment element"""
@@ -285,8 +285,8 @@ class TEIConverter(Converter):
             if e.tag == "text":
                 txt = (e.text or "")
                 if txt == "":
-                    print(u"Empty text in line:\n  {}".format(
-                        xmlhelper.get_text(textline)).encode("UTF-8"))
+                    print((u"Empty text in line:\n  {}".format(
+                        xmlhelper.get_text(textline)).encode("UTF-8")))
                 elif txt.strip() == "":
                     # whitespace
                     if seg is not None:
@@ -323,7 +323,7 @@ class TEIConverter(Converter):
                     except KeyError:
                         bases[base] = 1
             else:
-                print("Unexpected element {} in textline".format(e.tag))
+                print(("Unexpected element {} in textline".format(e.tag)))
         # add final seg
         if seg is not None:
             appendlist.append(seg)
@@ -334,12 +334,12 @@ class TEIConverter(Converter):
             self.current_size = max([(sizes[x], x) for x in sizes])[1]
         except ValueError:
             print("Empty line?")
-            print(textline.get("bbox", "nobbox"))
+            print((textline.get("bbox", "nobbox")))
             parent = textline.getparent()
             while parent.tag != "page":
                 parent = parent.getparent()
             pagenum = parent.get("id", "nopage")
-            print("on page {}".format(pagenum))
+            print(("on page {}".format(pagenum)))
         # Now that we have collected the words, we can set the
         # correct formatting word by word.
         self.wordcount = 0
@@ -429,7 +429,7 @@ class TEIConverter(Converter):
                             elif r == "italics":
                                 style.italics = True
                             else:
-                                print("Unknown style: {}".format(r))
+                                print(("Unknown style: {}".format(r)))
                     except KeyError:
                         # no special style or replacement needed
                         pass
@@ -570,7 +570,7 @@ class TEIConverter(Converter):
         if len(sizes) == 0:
             # return 0.0
             return (0.0, self.CLEAN)
-        sizelist = [(cnt, sz) for sz, cnt in sizes.items()]
+        sizelist = [(cnt, sz) for sz, cnt in list(sizes.items())]
         sizelist.sort(
                 cmp=lambda x,y: cmp((x[0],y[1]), (y[0],x[1])),
                 reverse=True)
@@ -668,7 +668,7 @@ class TEIConverter(Converter):
         rm = PDFResourceManager(
                 caching=True, font_correctors=self.font_correctors)
         laparams = LAParams()
-        outfp = StringIO.StringIO()
+        outfp = io.StringIO()
         # Actually ``StringIO()`` has no mode, but in Python 2
         # it is basically a binary object. PDFMiner tries to determine
         # the mode of the file pointer by first looking at the ``mode``
@@ -725,7 +725,7 @@ class MyFile(object):
             if isinstance(s, unicode):
                 ret.append(s.encode("UTF-8"))
                 cnt_unicode += 1
-                print(s.encode("UTF-8"))
+                print((s.encode("UTF-8")))
             elif isinstance(s, str):
                 ret.append(s)
                 cnt_string += 1
@@ -734,9 +734,9 @@ class MyFile(object):
                 logging.warning("Adding strange string object:\n"\
                         "\"" + str(s) + "\"")
                 cnt_unknown += 1
-        print("{} unknown objects".format(cnt_unknown))
-        print("{} string objects".format(cnt_string))
-        print("{} unicode objects".format(cnt_unicode))
+        print(("{} unknown objects".format(cnt_unknown)))
+        print(("{} string objects".format(cnt_string)))
+        print(("{} unicode objects".format(cnt_unicode)))
         return "".join(ret)
 
     def close(self):

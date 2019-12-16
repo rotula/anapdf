@@ -8,7 +8,7 @@ __all__ = ["Analyzer", "PDFAnalyzerError",
         "TEIConverter"]
 __version__ = "0.3.0"
 
-from analyzer import Analyzer
-from analyzer import PDFAnalyzerError
-from converters import TEIConverter
+from .analyzer import Analyzer
+from .analyzer import PDFAnalyzerError
+from .converters import TEIConverter
 
