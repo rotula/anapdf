@@ -2,6 +2,14 @@
 Changelog for anapdf
 ********************
 
+0.3.1 (2019-12-18)
+==================
+
+- TEIConverter.add_style: The style dict relied on the
+  simplestyle.Style objects as keys, but it is better to use
+  the style ID.
+- Some more fixes due to Python 2/3 port.
+
 0.3.0 (2019-12-17)
 ==================
 

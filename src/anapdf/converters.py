@@ -97,13 +97,14 @@ class TEIConverter(Converter):
     def add_style(self, style):
         """Add a style to the dictionary, return style id."""
         styleid = None
-        for s, si in list(self.styles.items()):
+        for si, s in list(self.styles.items()):
             if s == style:
                 styleid = si
+                break
         if styleid is None:
             styleid = "style_{}".format(self.next_style)
             self.next_style += 1
-            self.styles[style] = styleid
+            self.styles[styleid] = style
         return styleid
 
     def get_surface_coor(self, e):
@@ -204,7 +205,7 @@ class TEIConverter(Converter):
             pass
         # now add styles
         td = self.teidoc.xpath("//tei:tagsDecl", namespaces=ns)[0]
-        for style, styleid in list(self.styles.items()):
+        for styleid, style in list(self.styles.items()):
             rendition = T.rendition({
                 "{{{}}}id".format(xmlns): styleid,})
             rendition.tail = "\n"
@@ -572,8 +573,11 @@ class TEIConverter(Converter):
             return (0.0, self.CLEAN)
         sizelist = [(cnt, sz) for sz, cnt in list(sizes.items())]
         sizelist.sort(
-                cmp=lambda x,y: cmp((x[0],y[1]), (y[0],x[1])),
+                key=lambda x: (x[0], -x[1]),
                 reverse=True)
+        # sizelist.sort(
+        #         cmp=lambda x,y: cmp((x[0],y[1]), (y[0],x[1])),
+        #         reverse=True)
         # @@@TODO:
         # Make sure that the majority wins, but if there are two
         # or more sizes with equal number of occurrences, the
@@ -661,11 +665,11 @@ class TEIConverter(Converter):
 
     def write(self, outfile):
         """Write to outfile"""
-        outfile.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-        outfile.write(self.schematron_rules)
-        outfile.write("\n")
+        outfile.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".encode("UTF-8"))
+        outfile.write(self.schematron_rules.encode("UTF-8"))
+        outfile.write("\n".encode("UTF-8"))
         outfile.write(et.tostring(self.teidoc, encoding="UTF-8"))
-        outfile.write("\n")
+        outfile.write("\n".encode("UTF-8"))
 
     def _get_xml_data(self, sourcefile):
         """Store XML representation fo file"""

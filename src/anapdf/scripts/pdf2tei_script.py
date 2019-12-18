@@ -105,7 +105,7 @@ def main():
             outfilename = os.path.splitext(args.pdffile)[0] + "_tei.xml"
         else:
             outfilename = args.output
-        outfile = open(outfilename, "w")
+        outfile = open(outfilename, "wb")
     conv.write(outfile)
     if args.output != "-":
         outfile.close()

@@ -344,7 +344,7 @@ class Analyzer(object):
         rm = PDFResourceManager(
                 caching=True, font_correctors=self.font_correctors)
         laparams = LAParams()
-        outfp = open(self.xmlfile, "w")
+        outfp = open(self.xmlfile, "wb")
         device = XMLConverter(rm, outfp, codec="UTF-8", laparams=laparams,
                 imagewriter=None)
         interpreter = PDFPageInterpreter(rm, device)
