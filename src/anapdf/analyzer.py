@@ -135,12 +135,12 @@ class Analyzer(object):
     def extract_fonts(self):
         """Create HTML with all characters and images"""
         doc = et.parse(self.xmlfile)
-        with open(os.path.join(self.fontdir, "index.htm"), "w") as outfile:
+        with open(os.path.join(self.fontdir, "index.htm"), "wb") as outfile:
             self.write_font_index(outfile, doc)
 
     def write_font_index(self, outfile, doc):
         """Write font information into HMTL file"""
-        outfile.write(HTML_HEAD)
+        outfile.write(HTML_HEAD.encode("UTF-8"))
         fonts = {}
         imgcount = 0
         for page in doc.xpath("//page"):
@@ -184,7 +184,7 @@ class Analyzer(object):
                     outfile.write(
                             "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                             "BBox: {}, Descent: {}<br/>\n"
-                            .format(fm["bbox"], fm["descent"]))
+                            .format(fm["bbox"], fm["descent"]).encode("UTF-8"))
             fontcount += 1
         outfile.write(("\n</p>\n").encode("UTF-8"))
         fontcount = 0
@@ -210,7 +210,7 @@ class Analyzer(object):
                     outfile.write("\n</p>\n".encode("UTF-8"))
             chars = list(fonts[font].keys())
             chars.sort()
-            outfile.write("<table>\n")
+            outfile.write("<table>\n".encode("UTF-8"))
             styles = []
             if "bold" in basefontname.lower():
                 styles.append("bold")
@@ -223,7 +223,7 @@ class Analyzer(object):
                 bbox = [float(x) for x in fonts[font][char]["bbox"].split(",")]
                 width = int((bbox[2] - bbox[0])/72*self.resolution)
                 height = int((bbox[3] - bbox[1])/72*self.resolution)
-                outfile.write("<tr>\n")
+                outfile.write(u"<tr>\n".encode("UTF-8"))
                 outfile.write(("<td class=\"" + style + "\">" + char[0] + "</td>\n").encode("UTF-8"))
                 outfile.write(("<td><img src=\"pic/outpic").encode("UTF-8"))
                 outfile.write(("%d.jpg\"" % fonts[font][char]["img"])\
@@ -248,7 +248,7 @@ class Analyzer(object):
                 outfile.write(("<td>Scan: %d</td>\n" %\
                         fonts[font][char]["page"]).encode("UTF-8"))
                 # end line context
-                outfile.write("</tr>\n")
+                outfile.write("</tr>\n".encode("UTF-8"))
                 # add image to pages
                 pagenum = fonts[font][char]["page"]
                 pg = pages.get(pagenum, None)
@@ -336,7 +336,7 @@ class Analyzer(object):
         # print("Tags (under textline):")
         # for t in tags:
         #     print("  " + t)
-        outfile.write(HTML_FOOT)
+        outfile.write(HTML_FOOT.encode("UTF-8"))
         outfile.close()
 
     def get_xml_data(self):
