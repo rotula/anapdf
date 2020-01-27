@@ -7,6 +7,12 @@ Changelog for anapdf
 
 - BUGFIX: write_font_index had unicode problems from porting
   to Python 2/3.
+- BUGFIX: deal with missing fontmetrics information in font_index
+- BUGFIX: deal with special characters (ampersands etc.) when
+  writing font_index
+- FEATURE: (experimental) allow for a default base font size to
+  be specified at TEIConverter instantiation to determine relative
+  font sizes (such as upper or lower case in pseudo-smallcaps)
 
 0.3.1 (2019-12-18)
 ==================
