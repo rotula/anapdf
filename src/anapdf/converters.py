@@ -58,6 +58,7 @@ class TEIConverter(Converter):
     linecounter = 0  # current line on page
     wordcount = 0  # current word in line
     font_correctors = None  # list of font correctors
+    default_font_size = None  # a base font size to be assumed
 
     MIXED = 0  # mixed wordsize: at least two different sizes detected
     CLEAN = 1  # clean wordsize: every letter of same size
@@ -71,7 +72,7 @@ class TEIConverter(Converter):
             "application/xml\" schematypens=\"http://purl.oclc."\
             "org/dsdl/schematron\"?>"
 
-    def __init__(self, sourcefile, fontencfile=None, font_correctors=None):
+    def __init__(self, sourcefile, fontencfile=None, font_correctors=None, default_font_size=None):
         if not os.path.isfile(sourcefile):
             raise ConverterError("File not found: {}".format(str(sourcefile)))
         if sourcefile.endswith(".xml"):
@@ -93,6 +94,7 @@ class TEIConverter(Converter):
             for fc in font_correctors:
                 self.font_correctors.append(fc)
         self.styles = {}
+        self.default_font_size = default_font_size
 
     def add_style(self, style):
         """Add a style to the dictionary, return style id."""
@@ -332,7 +334,11 @@ class TEIConverter(Converter):
             textline.append(app_el)
         try:
             self.current_base = max([(bases[x], x) for x in bases])[1]
-            self.current_size = max([(sizes[x], x) for x in sizes])[1]
+            # experimental: use a default font size if supplied
+            if self.default_font_size is not None:
+                self.current_size = self.default_font_size
+            else:
+                self.current_size = max([(sizes[x], x) for x in sizes])[1]
         except ValueError:
             print("Empty line?")
             print((textline.get("bbox", "nobbox")))
@@ -393,6 +399,8 @@ class TEIConverter(Converter):
         ys = []
         wordsize, charsizes = self.get_wordsize(seg)
         for c in seg:
+            # if c.get("font") == "KFRKEE+OriginalGaramondBT-Roman-SC750" and (c.get("bbox") == "87.874,309.602,92.673,317.911" or c.get("bbox") == "245.157,320.199,253.401,331.278"):
+            #     import pdb; pdb.set_trace()
             b_generic_smallcaps = False
             # collect the bounding boxes to form the word bounding box
             bbox = c.get("bbox")
@@ -478,6 +486,7 @@ class TEIConverter(Converter):
                 elif c.get("font", "").find("SC750") != -1:
                     # @@@TODO: home made, pseudo-smallcaps font
                     c.text = c.text.upper()
+                    # pass
                 # elif size == self.current_size and wordsize < self.current_size:
                 elif size == self.current_size and charsizes == self.MIXED:
                     # This seems to be a mixed word.

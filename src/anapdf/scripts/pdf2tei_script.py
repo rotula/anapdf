@@ -83,6 +83,16 @@ def main():
         dest="b_logging",
         action="store_true"
     )
+    parser.add_argument(
+        "-b",
+        "--basesize",
+        "--basefontsize",
+        help=u"assume a default base font size",
+        default="0.0",
+        dest="basesize",
+        type=float,
+        metavar="BASESIZE"
+    )
     args = parser.parse_args()
     if args.b_logging:
         logging.basicConfig(level=logging.INFO)
@@ -93,10 +103,16 @@ def main():
         import imp
         fc_loader = imp.load_source("fc_loader", args.font_corrector_filename)
         font_correctors = fc_loader.fc_loader()
+    if args.basesize != 0.0:
+        basesize = args.basesize
+    else:
+        basesize = None
     conv = anapdf.TEIConverter(
-            args.pdffile,
-            fontencfile=args.fontencfile,
-            font_correctors=font_correctors)
+        args.pdffile,
+        fontencfile=args.fontencfile,
+        font_correctors=font_correctors,
+        default_font_size=basesize
+    )
     conv.convert(args.stop_after)
     if args.output == "-":
         outfile = sys.stdout
