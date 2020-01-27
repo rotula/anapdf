@@ -2,6 +2,12 @@
 Changelog for anapdf
 ********************
 
+0.3.2 (@@@@-@@-@@)
+==================
+
+- BUGFIX: write_font_index had unicode problems from porting
+  to Python 2/3.
+
 0.3.1 (2019-12-18)
 ==================
 

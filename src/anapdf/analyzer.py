@@ -184,7 +184,7 @@ class Analyzer(object):
                     outfile.write(
                             "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                             "BBox: {}, Descent: {}<br/>\n"
-                            .format(fm["bbox"], fm["descent"]))
+                            .format(fm["bbox"], fm["descent"]).encode("UTF-8"))
             fontcount += 1
         outfile.write(("\n</p>\n").encode("UTF-8"))
         fontcount = 0
