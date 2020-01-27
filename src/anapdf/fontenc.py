@@ -5,6 +5,8 @@
 Help with font re-encoding.
 """
 
+from io import open
+
 from lxml import etree as et
 
 def read(filename):
@@ -17,12 +19,15 @@ def read(filename):
               #             }
               #         }
               #     }
-    doc = et.HTML(open(filename).read())
+    doc = et.HTML(open(filename, "br").read())
     for font in doc.xpath("//h1"):
         fontname = font.text
         ret[fontname] = {}
         ret[fontname]["repl"] = {}
-        table = font.getnext().getnext()  # skip over font metric information
+        # skip over font metric information
+        table = font.getnext()
+        if table.tag == "p":
+            table = table.getnext()
         assert(table.tag == "table")
         for tr in table.xpath("./tr"):
             foundchar = (tr[0].text or "").strip()
