@@ -17,7 +17,7 @@ from pdfminer.converter import XMLConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 
-HTML_HEAD = """\
+HTML_HEAD = u"""\
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,7 +48,7 @@ p.fontmetrics {
 <body>
 """
 
-HTML_FOOT = """\
+HTML_FOOT = u"""\
 </body>
 </html>
 """
@@ -135,12 +135,12 @@ class Analyzer(object):
     def extract_fonts(self):
         """Create HTML with all characters and images"""
         doc = et.parse(self.xmlfile)
-        with open(os.path.join(self.fontdir, "index.htm"), "w") as outfile:
+        with open(os.path.join(self.fontdir, "index.htm"), "wb") as outfile:
             self.write_font_index(outfile, doc)
 
     def write_font_index(self, outfile, doc):
         """Write font information into HMTL file"""
-        outfile.write(HTML_HEAD)
+        outfile.write(HTML_HEAD.encode("UTF-8"))
         fonts = {}
         imgcount = 0
         for page in doc.xpath("//page"):
@@ -200,17 +200,17 @@ class Analyzer(object):
             if self.font_metrics is not None:
                 fm = self.font_metrics.get(font)
                 if fm is not None:
-                    outfile.write("<p class=\"fontmetrics\">\n".encode("UTF-8"))
+                    outfile.write(u"<p class=\"fontmetrics\">\n".encode("UTF-8"))
                     outfile.write(
-                            "BBox: {}<br/>\n"
+                            u"BBox: {}<br/>\n"
                             .format(fm["bbox"]).encode("UTF-8"))
                     outfile.write(
-                            "Descent: {}<br/>\n"
+                            u"Descent: {}<br/>\n"
                             .format(fm["descent"]).encode("UTF-8"))
                     outfile.write("\n</p>\n".encode("UTF-8"))
             chars = list(fonts[font].keys())
             chars.sort()
-            outfile.write("<table>\n")
+            outfile.write(u"<table>\n".encode("UTF-8"))
             styles = []
             if "bold" in basefontname.lower():
                 styles.append("bold")
@@ -223,32 +223,32 @@ class Analyzer(object):
                 bbox = [float(x) for x in fonts[font][char]["bbox"].split(",")]
                 width = int((bbox[2] - bbox[0])/72*self.resolution)
                 height = int((bbox[3] - bbox[1])/72*self.resolution)
-                outfile.write("<tr>\n")
-                outfile.write(("<td class=\"" + style + "\">" + char[0] + "</td>\n").encode("UTF-8"))
-                outfile.write(("<td><img src=\"pic/outpic").encode("UTF-8"))
-                outfile.write(("%d.jpg\"" % fonts[font][char]["img"])\
+                outfile.write(u"<tr>\n".encode("UTF-8"))
+                outfile.write((u"<td class=\"" + style + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
+                outfile.write((u"<td><img src=\"pic/outpic").encode("UTF-8"))
+                outfile.write((u"%d.jpg\"" % fonts[font][char]["img"])\
                         .encode("UTF-8"))
-                outfile.write((" width=\"%d\" " % width).encode("UTF-8"))
-                outfile.write(("height=\"%d\"/></td>\n" % height)\
+                outfile.write((u" width=\"%d\" " % width).encode("UTF-8"))
+                outfile.write((u"height=\"%d\"/></td>\n" % height)\
                         .encode("UTF-8"))
-                outfile.write(("<td class=\"" + style + "\">" + char[0] + "</td>\n").encode("UTF-8"))
-                outfile.write(("<td class=\"cid\">CID: " \
+                outfile.write((u"<td class=\"" + style + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
+                outfile.write((u"<td class=\"cid\">CID: " \
                         + char[1] + "</td>\n").encode("UTF-8"))
                 # line context
                 linebox = [float(x)
                         for x in fonts[font][char]["linebox"].split(",")]
                 linewidth = int((linebox[2] - linebox[0])/72*self.resolution)/3
                 lineheight = int((linebox[3] - linebox[1])/72*self.resolution)/3
-                outfile.write(("<td><img src=\"pic/linepic").encode("UTF-8"))
-                outfile.write(("%d.jpg\"" % fonts[font][char]["img"])\
+                outfile.write((u"<td><img src=\"pic/linepic").encode("UTF-8"))
+                outfile.write((u"%d.jpg\"" % fonts[font][char]["img"])\
                         .encode("UTF-8"))
-                outfile.write((" width=\"%d\" " % linewidth).encode("UTF-8"))
-                outfile.write(("height=\"%d\"/></td>\n" % lineheight)\
+                outfile.write((u" width=\"%d\" " % linewidth).encode("UTF-8"))
+                outfile.write((u"height=\"%d\"/></td>\n" % lineheight)\
                         .encode("UTF-8"))
-                outfile.write(("<td>Scan: %d</td>\n" %\
+                outfile.write((u"<td>Scan: %d</td>\n" %\
                         fonts[font][char]["page"]).encode("UTF-8"))
                 # end line context
-                outfile.write("</tr>\n")
+                outfile.write(u"</tr>\n".encode("UTF-8"))
                 # add image to pages
                 pagenum = fonts[font][char]["page"]
                 pg = pages.get(pagenum, None)
@@ -257,7 +257,7 @@ class Analyzer(object):
                     pages[pagenum] = pg
                 pg.append((fonts[font][char]["img"], fonts[font][char]["bbox"],
                     fonts[font][char]["linebox"]))
-            outfile.write(("</table>\n").encode("UTF-8"))
+            outfile.write((u"</table>\n").encode("UTF-8"))
         # create images
         outdir = os.path.join(self.fontdir, "pic")
         if not os.path.isdir(outdir):
@@ -300,7 +300,21 @@ class Analyzer(object):
                         oldbox,
                         box
                     )
-                img2 = img.crop(box)
+                try:
+                    img2 = img.crop(box)
+                except (MemoryError,) as memerr:
+                    logging.error(
+                        ("%s: imagefilename: %s, box: %s, img: %s, "
+                         "bbox: %s, size: (%d, %d)"),
+                         memerr,
+                         imgfilename,
+                         box,
+                         source_imgname,
+                         bbox,
+                         img.size[0],
+                         img.size[1]
+                    )
+                    raise
                 try:
                     img2.save(imgfilename)
                 except (SystemError,) as syserr:
@@ -336,8 +350,14 @@ class Analyzer(object):
         # print("Tags (under textline):")
         # for t in tags:
         #     print("  " + t)
-        outfile.write(HTML_FOOT)
+        outfile.write(HTML_FOOT.encode("UTF-8"))
         outfile.close()
+
+    def _escape(self, s):
+        s = s.replace(u"&", u"&amp;")
+        s = s.replace(u"<", u"&lt;")
+        s = s.replace(u">", u"&gt;")
+        return s
 
     def get_xml_data(self):
         """Store XML representation fo file"""
