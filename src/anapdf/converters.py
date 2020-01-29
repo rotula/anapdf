@@ -399,8 +399,6 @@ class TEIConverter(Converter):
         ys = []
         wordsize, charsizes = self.get_wordsize(seg)
         for c in seg:
-            # if c.get("font") == "KFRKEE+OriginalGaramondBT-Roman-SC750" and (c.get("bbox") == "87.874,309.602,92.673,317.911" or c.get("bbox") == "245.157,320.199,253.401,331.278"):
-            #     import pdb; pdb.set_trace()
             b_generic_smallcaps = False
             # collect the bounding boxes to form the word bounding box
             bbox = c.get("bbox")
@@ -471,6 +469,8 @@ class TEIConverter(Converter):
             # But we may only transform characters if
             # the form does not yet contain the information
             # from the appropriate font encoding!
+            # if c.get("font") == "KFRKEE+OriginalGaramondBT-Roman-SC750" and (c.get("bbox") == "87.874,309.602,92.673,317.911" or c.get("bbox") == "245.157,320.199,253.401,331.278"):
+            #     import pdb; pdb.set_trace()
             if style.smallcaps and not b_generic_smallcaps:
                 if size == wordsize and size < (self.current_size * 0.9):
                     c.text = c.text.lower()
