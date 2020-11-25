@@ -2,6 +2,11 @@
 Changelog for anapdf
 ********************
 
+0.4.1 (2020-11-25)
+==================
+
+- BUGFIX: use BytesIO instead of SringIO as ``outfp``
+
 0.4.0 (2020-01-28)
 ==================
 
