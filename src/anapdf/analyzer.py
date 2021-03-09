@@ -26,6 +26,7 @@ HTML_HEAD = u"""\
 <style>
 td {
   font-size:36pt;
+  vertical-align:baseline;
 }
 td.bold {
   font-weight:bold;
@@ -68,6 +69,7 @@ class Analyzer(object):
     font_metrics = None  # some metrics for each font;
                          # this dict will only be populated if
                          # xml data is being extracted
+    scales = (100.0, 100.0)
 
     b_make_images = True
     b_extract_xml_data = True
@@ -93,6 +95,7 @@ class Analyzer(object):
         if font_correctors is not None:
             for fc in font_correctors:
                 self.font_correctors.append(fc)
+        self.scales = kwargs.get("scales", (100.0, 100.0))
 
     def analyze(self):
         """Start the program suite"""
@@ -138,6 +141,28 @@ class Analyzer(object):
         with open(os.path.join(self.fontdir, "index.htm"), "wb") as outfile:
             self.write_font_index(outfile, doc)
 
+    def blow_up_bbox(self, bbox, scales=None):
+        """
+        Scale the bbox in vertical and horizontal direction,
+        values in percent.
+        """
+        if scales is None:
+            scales = self.scales
+        horz = scales[0]/100.0
+        vert = scales[1]/100.0
+        bbox = [float(x) for x in bbox.split(",")]
+        width_diff = (abs(bbox[0] - bbox[2])*horz - abs(bbox[0] - bbox[2]))/2
+        height_diff = (abs(bbox[1] - bbox[3])*vert - abs(bbox[1] - bbox[3]))
+        bbox[0] -= width_diff
+        bbox[2] += width_diff
+        if bbox[1] > bbox[3]:
+            # bbox[1] += height_diff
+            bbox[3] -= height_diff
+        else:
+            # bbox[1] -= height_diff
+            bbox[3] += height_diff
+        return ",".join([str(x) for x in bbox])
+
     def write_font_index(self, outfile, doc):
         """Write font information into HMTL file"""
         outfile.write(HTML_HEAD.encode("UTF-8"))
@@ -158,9 +183,9 @@ class Analyzer(object):
                         letter = fonts[font].get(letterref, None)
                         if letter is None:
                             textline = text.getparent()
-                            lbox = textline.get("bbox", "")
+                            lbox = self.blow_up_bbox(textline.get("bbox", ""), scales=self.scales)
                             fonts[font][letterref] = {
-                                    "bbox": text.get("bbox", None),
+                                    "bbox": self.blow_up_bbox(text.get("bbox", None), scales=self.scales),
                                     "page": int(current_page),
                                     "img": imgcount,
                                     "linebox": lbox}

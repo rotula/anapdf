@@ -78,6 +78,18 @@ def main():
             default=None,
             dest="font_corrector_filename",
             metavar="FC_CORRECTOR_LOADER")
+    parser.add_argument(
+            "--horz",
+            help=u"horizontal scaling character bbox (percent)",
+            default=100.0,
+            type=float,
+            dest="horz")
+    parser.add_argument(
+            "--vert",
+            help=u"vertical scaling character bbox (percent)",
+            default=100.0,
+            type=float,
+            dest="vert")
     args = parser.parse_args()
     if args.b_debug:
         logging.basicConfig(level=logging.DEBUG)
@@ -91,6 +103,7 @@ def main():
         args["font_correctors"] = font_correctors
     else:
         args = vars(args)
+    args["scales"] = (args["horz"], args["vert"])
     a = anapdf.Analyzer(**args)
     a.analyze()
 
