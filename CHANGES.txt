@@ -2,6 +2,11 @@
 Changelog for anapdf
 ********************
 
+0.4.3 (2022-04-06)
+==================
+
+- FEATURE: detect possible smallcaps style from glyphname
+
 0.4.2 (2021-03-09)
 ==================
 
