@@ -163,6 +163,9 @@ class Analyzer(object):
             bbox[3] += height_diff
         return ",".join([str(x) for x in bbox])
 
+    def _is_smallcaps(self, glyphname):
+        return glyphname.strip().lower().endswith(".sc")
+
     def write_font_index(self, outfile, doc):
         """Write font information into HMTL file"""
         outfile.write(HTML_HEAD.encode("UTF-8"))
@@ -177,6 +180,7 @@ class Analyzer(object):
                         fonts[font] = {}
                     txt = text.text or ""
                     cid = text.get("cid", "")
+                    glyphname = text.get("glyphname", u"")
                     letterref = (txt, cid)
                     if not(txt == "\n" or txt == "\r" or txt == "\r\n" or \
                             txt == "\n\r"):
@@ -188,6 +192,7 @@ class Analyzer(object):
                                     "bbox": self.blow_up_bbox(text.get("bbox", None), scales=self.scales),
                                     "page": int(current_page),
                                     "img": imgcount,
+                                    "sc": self._is_smallcaps(glyphname),
                                     "linebox": lbox}
                             imgcount += 1
         tags = set()
@@ -245,18 +250,24 @@ class Analyzer(object):
                 styles.append("sc")
             style = " ".join(styles).strip()
             for char in chars:
+                letterstyle = style
+                if fonts[font][char]["sc"]:
+                    if letterstyle:
+                        letterstyle += " sc"
+                    else:
+                        letterstyle += "sc"
                 bbox = [float(x) for x in fonts[font][char]["bbox"].split(",")]
                 width = int((bbox[2] - bbox[0])/72*self.resolution)
                 height = int((bbox[3] - bbox[1])/72*self.resolution)
                 outfile.write(u"<tr>\n".encode("UTF-8"))
-                outfile.write((u"<td class=\"" + style + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
+                outfile.write((u"<td class=\"" + letterstyle + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
                 outfile.write((u"<td><img src=\"pic/outpic").encode("UTF-8"))
                 outfile.write((u"%d.jpg\"" % fonts[font][char]["img"])\
                         .encode("UTF-8"))
                 outfile.write((u" width=\"%d\" " % width).encode("UTF-8"))
                 outfile.write((u"height=\"%d\"/></td>\n" % height)\
                         .encode("UTF-8"))
-                outfile.write((u"<td class=\"" + style + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
+                outfile.write((u"<td class=\"" + letterstyle + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
                 outfile.write((u"<td class=\"cid\">CID: " \
                         + char[1] + "</td>\n").encode("UTF-8"))
                 # line context
