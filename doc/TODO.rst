@@ -2,7 +2,8 @@
 TODO
 ****
 
-- Transformation der von anapdf erzeugten [Band].xml anpassen (aoe, 2022-04-13):
+Transformation der von anapdf erzeugten [Band].xml anpassen (aoe, 2022-04-13):
+==============================================================================
 
 Im Bereich der römischen Seitenzahlen wird momentan in <page> der Wert von @label nur im Fall der ersten Seite ("I") korrekt eingetragen.
 Alle weiteren scheinen von der ersten arabischen Seitenzahl (ggf. über Null) heruntergezählt zu werden. 
@@ -31,9 +32,27 @@ Hier erhalten die im Band römisch gezählten Einleitungsseiten in mgh_ss_rer_ge
 ...
 <page id="17" bbox="0.000,0.000,419.528,643.465" rotate="0" label="1">
 
-======================================================================
 
-- Bugfix anapdf (aoe, 2022-04-13):
+
+
+Bugfix pdf2tei (cra/aoe, 2022-04-14)
+=====================================
+
+Transformation von BSB 2257 funktioniert (BSB-tei.xml wird augsgegeben), aber mit folgender Fehlermeldung:
+
+C:\Users\Andreas Öffner\MGH Dropbox\Andreas Öffner\Projekte\dmgh\2257\extract>pdf2tei -f fonts\index.htm ..\mgh_ss_rer_germ_83.xml
+Empty line?
+56.070,462.146,70.806,465.482
+on page 357
+Empty line?
+... 
+
+>> Hat das mit dem Wechsel von seitenbreitem Text und Spalten auf ein und derselben Seite zu tun?
+
+
+
+Bugfix pdfminer (aoe, 2022-04-13)
+==================================
 
 Im Fall von BSB 2044 (MGH Libri mem. N. S. 8) gibt es ein Problem mit dem pdf mining: 
 
@@ -55,8 +74,10 @@ Traceback (most recent call last):
     return prefix + value
 TypeError: can't concat str to bytes
 
+>> Nach dem Update von pdfminer (2017/2020) scheint dieser Teil nun zu funktionieren, aber die xml-Erstellung terminiert erst nach sehr langer Zeit.
 
-======================================================================
 
-- emit logging messages while hacking apart files
+
+emit logging messages while hacking apart files (cra)
+======================================================
 
