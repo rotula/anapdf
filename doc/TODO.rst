@@ -33,6 +33,42 @@ Hier erhalten die im Band römisch gezählten Einleitungsseiten in mgh_ss_rer_ge
 <page id="17" bbox="0.000,0.000,419.528,643.465" rotate="0" label="1">
 
 
+Bugfix anapdf:
+==============
+Im Fall von BSB 2256 = MGH Hebr. Texte 2,2 bricht anapdf mit folgender Fehlermeldung ab:
+fonts/index.htm: anapf scheint hier auf ein Problem gestoßen zu sein: einige Zeichen werden nicht als Snippet angezeigt, weswegen eine Prüfung nicht möglich ist. Fehlermeldung:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda3\Scripts\anapdf-script.py", line 33, in <module>
+    sys.exit(load_entry_point('anapdf', 'console_scripts', 'anapdf')())
+  File "c:\users\andreas öffner\git\anapdf\src\anapdf\scripts\anapdf_script.py", line 108, in main
+    a.analyze()
+  File "c:\users\andreas öffner\git\anapdf\src\anapdf\analyzer.py", line 106, in analyze
+    self.extract_fonts()
+  File "c:\users\andreas öffner\git\anapdf\src\anapdf\analyzer.py", line 142, in extract_fonts
+    self.write_font_index(outfile, doc)
+  File "c:\users\andreas öffner\git\anapdf\src\anapdf\analyzer.py", line 381, in write_font_index
+    img2.save(imgfilename)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\PIL\Image.py", line 2240, in save
+    save_handler(self, fp, filename)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\PIL\JpegImagePlugin.py", line 782, in _save
+    ImageFile._save(im, fp, [("jpeg", (0, 0) + im.size, 0, rawmode)], bufsize)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\PIL\ImageFile.py", line 531, in _save
+    e.setimage(im.im, b)
+SystemError: tile cannot extend outside image
+
+
+Optimierung anapdf:
+==================
+Im Fall von (z.B.?) BSB 2044 und 2053 extrahiert anapdf offenbar Text, der in der PDF als Ergebnis der InDesign-Bearbeitung als Überrest oder Dublette vorhanden, aber nicht sichtbar ist (transparente Farbe?). 
+Beispiele:
+
+- BSB 2044, S. (II) = img 00002: Überrest: "Konstanzer Domkapitels", "Teil 1" 
+- BSB 2044, S. (III) = img 00003: Überrest: "Konstanzer Domkapitels", "Teil 1"), 
+- BSB 2044, S. 5 = img 000037: Dublette: "Graphisches Lagenschema vor der Restaurierung"; Überrest/Dublette mit S. 6: "Graphisches Lagenschema nach der Restaurierung (2008) gemäß der (korrigierten) Rekonstruktion von Schmid"
+- BSB 2044, S. 6 = img 000038: Dublette: "Älteres Gedenkbuch"; Dublette: "Lose Blätter"; Dublette: "Nonantola-Doppelblatt"
+- BSB 2053, S. XII = img 000012: Dublette: "Inhaltsverzeichnis"/"Inhaltsverzeichnis"
+
 
 
 Bugfix pdf2tei (cra/aoe, 2022-04-14)
