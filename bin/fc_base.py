@@ -76,7 +76,7 @@ swaptables = {
         u"\u0072": (u"\u03c1", 114),
         u"\u00e2": (u"\u1fb6", 226),
     },
-    "PSMT": {
+    "PSMT Special": {
         u"": (u"\u0302", 26),
     },
     "Spezialzeichen": {
@@ -286,6 +286,9 @@ swaptables = {
     "TimesSonder4": {
         u"\u00f9": (u"u\u0365", 5),
     },
+    "TT Special": {
+        u"\u00a6": (u"\u00a0", 166),
+    },
     "Wingdings2": {
         u"\u00cb": (u"\u2020", 173),
     },
@@ -295,122 +298,51 @@ swaptables = {
 class BaseCorrector(FontCorrector):
 
     def __init__(self):
-        self.sonder_roman_swap = { # OK
-                u"\u0058": u"\u25b2",  # elongata
-                u"\u00e0": u"a\u0364",
-                u"\u0075": u"u\u0364",  # CID: 117
-                u"\u00a9": u"W\u0366",  # CID: 169
-                u"\u00d4": u"\u01d1",
-                u"\u00da": u"\u016e",
-                u"\u00ed": u"i\u0364",
-                u"\u00f0": u"r\u0364",
-                u"\u00f4": u"\u01d2",
-                u"\u003e": u"V\u0302",  # CID: 62
-                u"\u0056": u"V\u030a",  # CID: 86
-                u"\u005a": u"\u017d",  # CID: 90
-                u"\u0065": u"\u0119",  # CID: 101
-                u"\u006c": u"\u0142",  # CID: 108
-                u"\u0072": u"\u0159",  # CID: 114
-                u"\u0076": u"v\u030a",  # CID: 118
-                u"\u0077": u"w\u0364",  # CID: 119
-                u"\u0078": u"\u25b2",  # CID: 120 (elongata)
-                u"\u0079": u"v\u0302",  # CID: 121
-                u"\u007a": u"\u017e",  # CID: 122
-                u"\u007d": u"v\u0364",  # CID: 125
-                u"\u2122": u"i\u036e",  # CID: 146 (i with caron (U+01D0)?)
-                u"\u0152": u"u\u0364",  # CID: 150
-                u"\u0161": u"\u010d",  # CID: 157
-                u"\u00d2": u"\u01d1",  # CID: 210
-                u"\u00e2": u"\u01ce",  # CID: 226
-                u"\u00e6": u"\u011b",  # CID: 230
-                u"\u00ee": u"\u01d0",  # CID: 238
-                u"\u00f2": u"\u01d2",  # CID: 242
-                u"\u00f6": u"o\u0364",  # CID: 246
-                u"\u00f7": u"\u010c",  # CID: 247
-                u"\u00fa": u"\u016f",  # CID: 250
-            }
-        self.sonder_roman2_swap = { # OK
-                u"a": u"\u0363",  # CID: 97
-                u"e": u"e",  # CID: 101
-                u"y": u"y",  # CID: 121
-                u"\u00b0": u"\u030a",  # CID: 176
-            }
-        self.sonder_roman3_swap = { # OK
-                u"\u003e": u"V\u0302",  # CID: 62
-                u"\u0075": u"u\u0364",  # CID: 117
-                u"\u0079": u"v\u030a",  # CID: 121
-                u"\u00a9": u"W\u0366",  # CID: 169
-                u"\u00bc": u"v\u0302",  # CID: 188
-                u"\u00d3": u"O\u0364",  # CID: 211
-                u"\u00da": u"\u016e",  # CID: 218
-                u"\u00f6": u"o\u0364",  # CID: 246
-            }
-        self.griechisch_medium_swap = { # OK
-                u"\u002a": u"\u1fbf",  # CID: 42
-                u"\u0041": u"\u0391",  # CID: 65
-                u"\u0056": u"\u03c2",  # CID: 86
-                u"\u0068": u"\u03b7",  # CID: 104
-                u"\u006d": u"\u03bc",  # CID: 109
-                u"\u0072": u"\u03c1",  # CID: 114
-                u"\u00e2": u"\u1fb6",  # CID: 226
-            }
-        self.tt_swap = {
-                u"\u00a6": u"\u00a0",  # CID: 166
-            }
-        self.spezialzeichen_swap = { # OK
-                u"2": u"\u25cb",  # white circle
-                u"3": u"\u25d2",  # circle with lower half black
-                u"4": u"\u25d4",  # circle with upper right quadrant black
-                                  # NB: should actually be: circle with
-                                  # lower right quadrant black
-                u"5": u"\u25d5",  # circle with all but upper left quadrant
-                                  # black
-                                  # NB: should actually be: circle with all
-                                  # but lower right quadrant black
-            }
-        self.symbol_swap = { # OK
-                u"Q": u"\u0398",  # Theta
-            }
-        self.symbol_cid_swap = { # OK
-                109: u"\u2192",  # CID: 109 (right arrow)
-                52: u"\u0398",  # Theta
-            }
-        # This is strange: if we submit an empty dictionary to
-        # update the unicode_map of a PDFCIDFont, the unicode
-        # conversion will be fine afterwards.
-        self.psmt_cid_swap = { # OK
-                # 66: u"B",
-                26: u"\u0302",  # comibining circumflex accent
-            }
+        pass
 
     def correct(self, font):
+        self.adjust_font_metrics(font)
+        self.reencode_font(font)
+
+    def reencode_font(self, font):
+        # first, go for a lucky guess
+        basefontname = self._mk_basename(font.fontname)
+        swaptable = swaptables.get(basefontname)
+        if swaptable is not None:
+            self.reencode(font, swaptable)
+        elif self._is_tt_font(font.fontname):
+            self.reencode(font, swaptables["TT Special"])
+        elif "TimesSonder2" in font.fontname:
+            self.reencode(font, swaptables["TimesSonder2"])
+        elif "TimesSonder3" in font.fontname:
+            self.reencode(font, swaptables["TimesSonder3"])
+        elif "TimesSonder" in font.fontname:
+            self.reencode(font, swaptables["TimesSonder-Roman"])
+        elif "GriechischMedium" in font.fontname:
+            self.reencode(font, swaptables["GriechischMedium"])
+        elif "Spezialzeichen" in font.fontname:
+            self.reencode(font, swaptables["Spezialzeichen"])
+        elif self._is_psmt_font(font.fontname):
+            self.cid_reencode(font, swaptables["PSMT Special"])
+        elif self._is_symbol_font(font.fontname):
+            try:
+                self.reencode(font, swaptables["Symbol"])
+            except FontCorrectorError:
+                logging.warning("Trying CID update.")
+                self.cid_reencode(font, swaptables["Symbol"])
+    
+    def _mk_basename(self, fontname):
+        pos = fontname.find("+")
+        if pos == -1:
+            return fontname
+        return fontname[pos + 1:]
+
+    def adjust_font_metrics(self, font):
         if self._is_tt_font(font.fontname):
             font.descriptor[u"FontBBox"] = [-198, -247, 1213, 1013]
             font.bbox = font.descriptor[u"FontBBox"]
             font.descriptor[u"Descent"] = -216
             font.descent = font.descriptor[u"Descent"]
-            self.reencode(font, self.tt_swap)
-        elif "TimesSonder2" in font.fontname:
-            self.reencode(font, self.sonder_roman2_swap)
-        elif "TimesSonder3" in font.fontname:
-            self.reencode(font, self.sonder_roman3_swap)
-        elif "TimesSonder" in font.fontname:
-            # print(font.descriptor)
-            # print(dir(font))
-            # adjust some encodings
-            self.reencode(font, self.sonder_roman_swap)
-        elif "GriechischMedium" in font.fontname:
-            self.reencode(font, self.griechisch_medium_swap)
-        elif "Spezialzeichen" in font.fontname:
-            self.reencode(font, self.spezialzeichen_swap)
-        elif self._is_psmt_font(font.fontname):
-            self.cid_reencode(font, self.psmt_cid_swap)
-        elif self._is_symbol_font(font.fontname):
-            try:
-                self.reencode(font, self.symbol_swap)
-            except FontCorrectorError:
-                logging.warning("Trying CID update.")
-                self.cid_reencode(font, self.symbol_cid_swap)
         # @@@TODO:
         # Seems a special case with DD PH.
         # Throw it out?
