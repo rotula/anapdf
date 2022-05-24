@@ -35,6 +35,8 @@ here. This will probably change in the future.
 
 import logging
 
+from pdfminer.cmapdb import FileUnicodeMap
+
 def fc_loader():
     fc = BaseCorrector()
     return [fc]
@@ -232,8 +234,8 @@ swaptables = {
         u"\u2122": (u"i\u036e", 146),  # (i with caron (U+01D0)?)
     },
     "TimesSonder2": {
-        u"\u0061": (u"\u0363", CID: 97),
-        u"\u00b0": (u"\u030a", CID: 176),
+        u"\u0061": (u"\u0363", 97),
+        u"\u00b0": (u"\u030a", 176),
     },
     "TimesSonder3": {
         u"\u003e": (u"V\u0302", 62),
@@ -389,16 +391,17 @@ class BaseCorrector(FontCorrector):
         try:
             ctu = {}
             for k, v in font.cid2unicode.items():
-                ctu[k] = swap.get(v, v)
+                ctu[k] = swap.get(v, (v, None))[0]
             font.cid2unicode = ctu
             if font.unicode_map:
                 font.unicode_map.cid2unichr.update(ctu)
         except AttributeError:
-            msg = "Cannot re-encode font {}".format(font.fontname)
-            logging.warning(msg)
-            raise FontCorrectorError(msg)
+            msg = "Cannot directly re-encode font %s. Trying cid_reencode."
+            logging.warning(msg, font.fontname)
+            self.cid_reencode(font, swap)
 
     def cid_reencode(self, font, swap):
+        swap = self._recode_swap_table(swap)
         try:
             ctu = {}
             for k, v in font.cid2unicode.items():
@@ -412,5 +415,21 @@ class BaseCorrector(FontCorrector):
             if font.unicode_map:
                 font.unicode_map.cid2unichr.update(swap)
             else:
-                logging.warning("Could not re-encode font {}."\
+                logging.warning("Could not re-encode font {}. Building ad-hoc unicode_map."\
                         .format(font.fontname))
+                unicode_map = FileUnicodeMap()
+                unicode_map.cid2unichr.update(swap)
+                font.unicode_map = unicode_map
+
+    def _recode_swap_table(self, swap):
+        """
+        Re-arrange the swap table.
+
+        Input looks like: {instr: (outstr, cid),}
+
+        Output should look like: {cid: outstr}
+        """
+        ret = {}
+        for k in swap:
+            ret[swap[k][1]] = swap[k][0]
+        return ret
