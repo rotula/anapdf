@@ -61,7 +61,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'anapdf'
-copyright = u'2016–2020, Clemens Radl'
+copyright = u'2016–2022, Clemens Radl'
 author = u'Clemens Radl'
 
 # The version info for the project you're documenting, acts as replacement for
