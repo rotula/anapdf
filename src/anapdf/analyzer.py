@@ -73,6 +73,7 @@ class Analyzer(object):
 
     b_make_images = True
     b_extract_xml_data = True
+    b_extract_fonts = True
 
     def __init__(self, **kwargs):
         self.pdffile = kwargs.get("pdffile")
@@ -80,7 +81,8 @@ class Analyzer(object):
             raise PDFAnalyzerError("No PDF file specified.")
         if not os.path.isfile(self.pdffile):
             raise PDFAnalyzerError("{} is not a PDF file.".format(self.pdffile))
-        self.xmlfile = os.path.splitext(self.pdffile)[0] + ".xml"
+        self.xmlfile = kwargs.get("outfilename",
+                                  os.path.splitext(self.pdffile)[0] + ".xml")
         self.imdir = kwargs.get("imdir", "imdir")
         self.fontdir = kwargs.get("fontdir", "fonts")
         if not os.path.isdir(self.imdir):
@@ -90,6 +92,7 @@ class Analyzer(object):
         self.resolution = kwargs.get("resolution", 300)
         self.b_make_images = kwargs.get("make_images", True)
         self.b_extract_xml_data = kwargs.get("extract_xml_data", True)
+        self.b_extract_fonts = kwargs.get("extract_fonts", True)
         self.font_correctors = []
         font_correctors = kwargs.get("font_correctors")
         if font_correctors is not None:
@@ -103,7 +106,8 @@ class Analyzer(object):
             self.images()
         if self.b_extract_xml_data:
             self.get_xml_data()
-        self.extract_fonts()
+        if self.b_extract_fonts:
+            self.extract_fonts()
 
     def images(self):
         """Create the images"""

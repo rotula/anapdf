@@ -186,11 +186,13 @@ class TEIConverter(Converter):
                 surface[0][0].append(T.label(ana="#nativeNo"))
                 surface[0][0].append(T.item(label))
                 surface[0][0][-1].tail = "\n  "
+                page.set("n", label)
             self.facs_scan.append(surface)
             page.set("sameAs", "#page_{:05d}".format(self.pagecount))
             xmlhelper.delat(page, "id")
             xmlhelper.delat(page, "rotate")
             xmlhelper.delat(page, "bbox")
+            xmlhelper.delat(page, "label")
             # correct indentation
             try:
                 self.current_page_surface[-1].tail = "\n "
