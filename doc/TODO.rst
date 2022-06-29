@@ -2,6 +2,12 @@
 TODO
 ****
 
+- How is the CID used in font handling (correction, encoding)?
+- What does the ``fc_base.py`` do? Is it OK, if one input Unicode code point appears
+  twice within a font in ``index.htm`` but with a different CID? (lower/upper case
+  characters in some fonts) How to do this in ``fc_base.py``?
+- How does PDF, how does PDFMiner etc. deal with soft hyphens?
+
 Transformation der von anapdf erzeugten [Band].xml anpassen (aoe, 2022-04-13):
 ==============================================================================
 
