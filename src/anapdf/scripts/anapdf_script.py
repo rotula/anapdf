@@ -77,7 +77,6 @@ def main():
             default=True,
             action="store_false",
             dest="extract_fonts")
-    )
     parser.add_argument(
             "-c",
             "--corr",
