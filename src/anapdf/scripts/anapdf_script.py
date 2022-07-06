@@ -71,6 +71,13 @@ def main():
             action="store_false",
             dest="extract_xml_data")
     parser.add_argument(
+            "--no-fonts",
+            "--nofonts",
+            help=(u"skip font extraction (index.htm)"),
+            default=True,
+            action="store_false",
+            dest="extract_fonts")
+    parser.add_argument(
             "-c",
             "--corr",
             "--corrector",
@@ -78,6 +85,14 @@ def main():
             default=None,
             dest="font_corrector_filename",
             metavar="FC_CORRECTOR_LOADER")
+    parser.add_argument(
+            "-o",
+            "--outfile",
+            help=(u"store XML output in this file "
+                  u"(defaults to PDFFILE with xml extension)"),
+            dest="outfilename",
+            metavar="OUTFILE"
+    )
     parser.add_argument(
             "--horz",
             help=u"horizontal scaling character bbox (percent)",

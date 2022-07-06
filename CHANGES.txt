@@ -2,6 +2,14 @@
 Changelog for anapdf
 ********************
 
+0.4.4 (@@@@-@@-@@)
+==================
+
+- BUGFIX: remove invalid ``label`` attribute from ``div`` in TEIConverter
+- FEATURE: allow skipping of font extraction 
+- FEATURE: allow output filename for ``anapdf``
+- FEATURE: integrate pic number in index.htm
+
 0.4.3 (2022-04-06)
 ==================
 
