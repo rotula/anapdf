@@ -40,6 +40,10 @@ td.italics {
 td.cid {
   font-size:12pt;
 }
+td.pic {
+  font-size:18pt;
+  padding-left:1em;
+}
 p.fontmetrics {
   margin-left: 40px;
   color: red;
@@ -81,8 +85,9 @@ class Analyzer(object):
             raise PDFAnalyzerError("No PDF file specified.")
         if not os.path.isfile(self.pdffile):
             raise PDFAnalyzerError("{} is not a PDF file.".format(self.pdffile))
-        self.xmlfile = kwargs.get("outfilename",
-                                  os.path.splitext(self.pdffile)[0] + ".xml")
+        self.xmlfile = kwargs.get("outfilename")
+        if not self.xmlfile:
+            self.xmlfile = os.path.splitext(self.pdffile)[0] + ".xml"
         self.imdir = kwargs.get("imdir", "imdir")
         self.fontdir = kwargs.get("fontdir", "fonts")
         if not os.path.isdir(self.imdir):
@@ -288,6 +293,8 @@ class Analyzer(object):
                 outfile.write((u"<td>Scan: %d</td>\n" %\
                         fonts[font][char]["page"]).encode("UTF-8"))
                 # end line context
+                outfile.write((u"<td class=\"pic\">Pic: %d</td>\n" %\
+                        fonts[font][char]["img"]).encode("UTF-8"))
                 outfile.write(u"</tr>\n".encode("UTF-8"))
                 # add image to pages
                 pagenum = fonts[font][char]["page"]
@@ -400,7 +407,7 @@ class Analyzer(object):
         return s
 
     def get_xml_data(self):
-        """Store XML representation fo file"""
+        """Store XML representation of file"""
         rm = PDFResourceManager(
                 caching=True, font_correctors=self.font_correctors)
         laparams = LAParams()
