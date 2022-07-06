@@ -101,7 +101,7 @@ swaptables = {
         u"1e98": (u"w\u0366", 1243),
     },
     "PSMT Special": { 
-        u"": (u"\u0302", 26), # Hat das so seine Richtigkeit?
+        u"": (u"\u0302", 26), # Hat das so seine Richtigkeit? Im Auge behalten!
     },
     "SGSonder2Italic": { # in der index.htm ohne vorangestellte Buchstabengruppe geführt - ok?
          u"\u0055": (u"U\u0364", 85),
@@ -218,6 +218,7 @@ swaptables = {
     },
     "SymbolMT": {
         u"\u0046": (u"\u03A6", 41),
+        u"\u0051": (u"\u0398", 52),
     },
     "TimesNewRomanPS-ItalicMT": {
         u"\u0131": (u"\u00ed", 213),
@@ -226,10 +227,32 @@ swaptables = {
     },
     "TimesNewRomanPSMT": {
         u"\u00ad": (u"\u00ad", 3),
-        u"\u00b0": (u"y\u0366", 176),
+        u"\u00b0": (u"y\u0366", 176), 
+        u"\u016e": (u"U\u0366", 291), # Ersetzung: U mit Ring > U mit übergeschr. o
+        u"\u016f": (u"u\u0366", 157), # Ersetzung: u mit Ring > u mit übergeschr. o. Dopplung mit CID 292
+        u"\u016f": (u"u\u0366", 292), # Ersetzung: u mit Ring > u mit übergeschr. o. Dopplung mit CID 157
+    },
+    "Timespunktiert": {
+        u"\u0043": (u"C\u0323", 67),
+        u"\u0049": (u"I\u0323", 73),
+        u"\u004c": (u"L\u0323", 76),
+        u"\u0061": (u"a\u0323", 97),
+        u"\u0065": (u"e\u0323", 101),
+        u"\u0068": (u"h\u0323", 104),
+        u"\u0069": (u"i\u0323", 105),
+        u"\u006d": (u"m\u0323", 109),
+        u"\u006e": (u"n\u0323", 110),
+        u"\u0072": (u"r\u0323", 114),
+        u"\u0073": (u"s\u0323", 115),
+        u"\u0074": (u"t\u0323", 116),
+        u"\u0075": (u"u\u0323", 117),
+    },
+    "Timespunktiert-Bold": {
+        u"\u006e": (u"n\u0323", 110),
     },
     "TimesSonder-Italic": {
         u"\u0023": (u"\u0158", 35),
+        u"\u0063": (u"\u0107", 99),
         u"\u0065": (u"\u0119", 101),
         u"\u006c": (u"\u0142", 108),
         u"\u006e": (u"\u0144", 110),
@@ -246,7 +269,7 @@ swaptables = {
     },
     "TimesSonder-Roman": {
         u"\u003e": (u"V\u0302", 62),
-        u"\u0056": (u"V\u030a", 86),
+        u"\u0056": (u"V\u0366", 86), # geändert aus V + Kringel (=u030a)
         u"\u0058": (u"\u25b2", -1),
         u"\u005a": (u"\u017d", 90),
         u"\u0065": (u"\u0119", 101),
@@ -254,6 +277,7 @@ swaptables = {
         u"\u006d": (u"m\u0304", 109),
         u"\u006f": (u"\u0131\u0366", 111),
         u"\u0072": (u"\u0159", 114),
+        u"\u0074": (u"t\u0323", 116), 
         u"\u0075": (u"u\u0364", 117),
         u"\u0076": (u"v\u0366", 118),
         u"\u0077": (u"w\u0364", 119),
@@ -263,12 +287,14 @@ swaptables = {
         u"\u007d": (u"v\u0364", 125),
         u"\u00a3": (u"n\u0304", 163), 
         u"\u00a9": (u"W\u0366", 169),
-        u"\u00d2": (u"\u01d1", 210),
+        u"\u00b3": (u"e\u0323", 179), # geändert aus hart codiertem e mit Unterpunkt U+01B9 
+        u"\u00d2": (u"O\u036e", 210), # geändert aus O mit Caron
         u"\u00d3": (u"O\u0364", 211),
         u"\u00d4": (u"\u01d1", -1),
         u"\u00da": (u"\u016e", -1),
         u"\u00e0": (u"a\u0364", -1),
         u"\u00e2": (u"\u01ce", 226),
+        u"\u00e5": (u"a\u0323", 229),
         u"\u00e6": (u"\u011b", 230),
         u"\u00ed": (u"i\u0364", -1),
         u"\u00ee": (u"\u01d0", 238),
@@ -278,9 +304,12 @@ swaptables = {
         u"\u00f6": (u"o\u0364", 246),
         u"\u00f7": (u"\u010c", 247),
         u"\u00fa": (u"u\u0366", 250),
+        u"\u00fb": (u"\u16b", 251),
         u"\u0131": (u"i\u0366", 7),
         u"\u0152": (u"u\u0364", 140),
-        u"\u0161": (u"\u010d", 157),
+        u"\u0161": (u"\u010d", 157), 
+        u"\u0178": (u"i\u0323", 159),
+        u"\u2020": (u"d\u0323", 134),  
         u"\u2122": (u"i\u036e", 146),  # (i with caron (U+01D0)?)
     },
     "TimesSonder2": {
@@ -294,6 +323,7 @@ swaptables = {
         u"\u0067": (u"g\u0364", 103),
         u"\u0068": (u"h\u0364", 104),
         u"\u006d": (u"m\u0364", 109),
+        u"\u006f": (u"o\u0323", 111), 
         u"\u0070": (u"p\u0364", 112),
         u"\u0072": (u"r\u0366", 114),
         u"\u0073": (u"s\u0364", 115),
@@ -301,10 +331,13 @@ swaptables = {
         u"\u0075": (u"u\u0364", 117),
         u"\u0076": (u"v\u0364", 118),
         u"\u0077": (u"w\u0367", 119),
-        u"\u0079": (u"v\u030a", 121),
+        # u"\u0079": (u"v\u030a", 121), CID-Konflikt
+        # u"\u0079": (u"y\u0366", 121), CID-Konflikt (hier nach BSB 2025)
         u"\u007a": (u"z\u0364", 122),
-        # u"\u007d": (u"w\u0366", 125),
+        u"\u007b": (u"r\u0323", 123),
+        u"\u007d": (u"w\u0366", 125),
         # u"\u007d": (u"v\u0364", 125),
+        u"\u00a2": (u"g\u0323", 162),
         u"\u00a9": (u"W\u0366", 169),
         u"\u00b0": (u"a\u1de0", 176),
         u"\u00b2": (u"v\u0364", 178),
@@ -331,12 +364,15 @@ swaptables = {
         u"\u00f1": (u"n\u0364", 241),
         u"\u00f2": (u"o\u0366", 242),
         u"\u00f3": (u"o\u0367", 243),
+        u"\u00f4": (u"o\u01d2", 244),
         u"\u00f5": (u"o\u0365", 245),
         u"\u00f6": (u"o\u0364", 246),
         u"\u00f9": (u"u\u0367", 249),
-        u"\u00fb": (u"u\u036e", 251), # Lesefehler aö, korrigiert aö
+        u"\u00fb": (u"u\u036e", 251),
+        u"\u00fc": (u"u\u0323", 252),  
         u"\u00fd": (u"y\u0364", 253),
         u"\u0152": (u"u\u0364", -1),
+        u"\u0178": (u"i\u0323", 159),
         u"\u2022": (u"u\u0365", 244),
     },
     "TimesSonder3-Italic": {
@@ -344,6 +380,7 @@ swaptables = {
         u"\u005a": (u"\u017b", 90),
         u"\u00a4": (u"\u0161", 130),
         u"\u00d0": (u"\u017c", 208),
+        u"\u00e0": (u"a\u0364", 224),
         u"\u00e5": (u"\u0105", 229),
         u"\u00e6": (u"\u011b", 230),
         u"\u00f7": (u"\u010c", 247),
