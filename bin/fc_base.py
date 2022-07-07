@@ -202,6 +202,9 @@ swaptables = {
         u"\u00e1": (u"\u00c1", 127),
     },
     "StempelGaramondLTPro-Roman": {
+        u"\u016e": (u"U\u0366", 10),
+        u"\u016f": (u"u\u0366", 5), # aus BSB 2037
+        u"\u016f": (u"u\u0366", 7), # aus BSB 2036
         u"\u016f": (u"u\u0366", 29),
         u"\u016f": (u"u\u0366", 31),
     },
@@ -217,8 +220,11 @@ swaptables = {
         u"\u0051": (u"\u0398", 52),  # Theta
     },
     "SymbolMT": {
-        u"\u0046": (u"\u03A6", 41),
+        u"\u0021": (u"\u003e", 6), # Muss ich die Spitzklammer U+003e als &gt; codieren?
+        u"\u0046": (u"\u03a6", 41),
         u"\u0051": (u"\u0398", 52),
+        u"\u00a2": (u"\u2329", 3),
+        u"\u00b2": (u"\u232a", 2),
     },
     "TimesNewRomanPS-ItalicMT": {
         u"\u0131": (u"\u00ed", 213),
@@ -226,6 +232,7 @@ swaptables = {
         u"\u02db": (u"\u0105", 222),
     },
     "TimesNewRomanPSMT": {
+        u"\u0065": (u"\u0119", 101),
         u"\u00ad": (u"\u00ad", 3),
         u"\u00b0": (u"y\u0366", 176), 
         u"\u016e": (u"U\u0366", 291), # Ersetzung: U mit Ring > U mit übergeschr. o
