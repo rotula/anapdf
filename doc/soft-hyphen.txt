@@ -1,6 +1,9 @@
 Soft hyphen (U+00AD): Belege für Fälle im Binnentext (ohne Zeilenende):
 =======================================================================
 
+((Suche mit: "//text[text() = '­'][count(following-sibling::*)>1]" ))
+
+
 BSB 66356:
 
 - Scan 14: "Casa-Marii": <text font="SHYWKN+StempelGrmnd-Roman" bbox="238.179,334.184,241.485,344.495" size="10.310" cid="45" rise="0" origin="238.179,336.471" msize="8.5" glyphname="hyphen">­</text>
@@ -10,3 +13,27 @@ BSB 66356:
 - Scan 69: "Abba-/tis" <text font="SHYWKN+StempelGrmnd-Roman" bbox="218.463,256.279,222.352,268.409" size="12.130" cid="45" rise="0" origin="218.463,258.969" msize="10.0" glyphname="hyphen">­</text>
 	>>> Ist korrekt: Soft hyphen als Transkriptionszeichen auch im Druck
 	>>> analaog (selbe Seite): "psallen-/tium"; u.ö.
+- Scan 92: ": -tum" zum Nachweis der Wortendung
+
+>> andere, problematische Fälle tauchen nicht auf.
+
+
+BSB 2039:
+
+- Verwendung v.a. in der Form "L-Initiale", "et-Kürzung" und bisweilen bei mehrgliedrigen Vornamen
+
+>> offenbar insgesamt unbedenklich
+
+
+BSB 2040:
+
+zu viele Treffer --> Suchausdruck spezifiziert zu: "//text[text() = '­'][count(following-sibling::*)>1][following-sibling::text[1][text() != ' ' and text() != '­']][preceding-sibling::text[1][text() !=  '­']]"
+>> damit sind Treffer in Formulierungen wie "Bunde- und Lösegewalt" sowie die verwendeten "--" ausgeschlossen
+
+>> die verbleibenden 37 Treffer sind wiederum unbedenklich (verlangen einen 'harten' Trennstrich)
+
+
+=============
+Zwischenfazit
+=============
+Soweit deutet alles darauf hin, dass eine simple Ersetzung der soft hyphens durch U+002D möglich (und sinnvoll) wäre.
