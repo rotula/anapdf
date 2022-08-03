@@ -1,0 +1,12 @@
+Soft hyphen (U+00AD): Belege für Fälle im Binnentext (ohne Zeilenende):
+=======================================================================
+
+BSB 66356:
+
+- Scan 14: "Casa-Marii": <text font="SHYWKN+StempelGrmnd-Roman" bbox="238.179,334.184,241.485,344.495" size="10.310" cid="45" rise="0" origin="238.179,336.471" msize="8.5" glyphname="hyphen">­</text>
+	>>> richtig wäre eigentlich ein harter Trennstrich, oder?
+- Scan 51: "97-108; 109-120" etc.: <text font="SHYWKN+StempelGrmnd-Roman" bbox="219.780,179.252,222.503,187.743" size="8.491" cid="45" rise="0" origin="219.780,181.135" msize="7.0" glyphname="hyphen">­</text>
+	>>> richtig wäre auch hier eigentlich ein harter Trennstrich, oder?
+- Scan 69: "Abba-/tis" <text font="SHYWKN+StempelGrmnd-Roman" bbox="218.463,256.279,222.352,268.409" size="12.130" cid="45" rise="0" origin="218.463,258.969" msize="10.0" glyphname="hyphen">­</text>
+	>>> Ist korrekt: Soft hyphen als Transkriptionszeichen auch im Druck
+	>>> analaog (selbe Seite): "psallen-/tium"; u.ö.

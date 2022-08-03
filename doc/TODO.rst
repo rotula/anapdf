@@ -7,6 +7,16 @@ TODO
   twice within a font in ``index.htm`` but with a different CID? (lower/upper case
   characters in some fonts) How to do this in ``fc_base.py``?
 - How does PDF, how does PDFMiner etc. deal with soft hyphens?
+	>>> aoe: cf. git\anapdf\doc\soft-hyphen.txt
+
+- aoe: How is it possible that the "Symbol" font in BSB 66356 has two CIDs (CID 2, CID 3) for the same glyph (small letter Omega in italics), 
+and, on the other hand, associates the same CID with different glyphs? 
+CID 3 = small letter Omega (in italics) AND capital letter Omega (roman)
+CID 2 = small letter Omega (in italics) AND capital letter Delta (roman)
+
+
+
+
 
 Transformation der von anapdf erzeugten [Band].xml anpassen (aoe, 2022-04-13):
 ==============================================================================
