@@ -28,9 +28,20 @@ BSB 2039:
 BSB 2040:
 
 zu viele Treffer --> Suchausdruck spezifiziert zu: "//text[text() = '­'][count(following-sibling::*)>1][following-sibling::text[1][text() != ' ' and text() != '­']][preceding-sibling::text[1][text() !=  '­']]"
->> damit sind Treffer in Formulierungen wie "Bunde- und Lösegewalt" sowie die verwendeten "--" ausgeschlossen
+>> damit sind Treffer in Formulierungen wie "Binde- und Lösegewalt" sowie die verwendeten "--" ausgeschlossen
 
 >> die verbleibenden 37 Treffer sind wiederum unbedenklich (verlangen einen 'harten' Trennstrich)
+
+
+BSB 66305, 66309 & 66310: 
+
+>> keine Verwendung von soft hyphen
+
+
+BSB 2032:
+
+>> keine problematischen Fälle
+
 
 
 =============
