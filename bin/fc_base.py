@@ -159,6 +159,7 @@ swaptables = {
     },
     "STGSneu-Italic": {
         u"\u004b": (u"\u1e32", 75),
+        u"\u0056": (u"V\u0366", 86), 
         u"\u0067": (u"\u0121", 103),
         u"\u006b": (u"\u1e33", 107),
         u"\u00d8": (u"\u1e6c", 216),
@@ -184,6 +185,7 @@ swaptables = {
         u"\u2021": (u"\u0142", 130),
     },
     "StGS4-Roman": {
+        u"\u00b0": (u"\u0366", 176), 
         u"\u00f2": (u"o\u0367", 242),
     },
      "StGSonderBold": {
@@ -201,6 +203,7 @@ swaptables = {
         u"\u00a1": (u"\u017e", 161),
         u"\u00d3": (u"\u01d1", 211),
         u"\u00d8": (u"\u0158", 216),
+        u"\u00da": (u"U\u0366", 218),
         u"\u00df": (u"\u0143", 223),
         u"\u00e1": (u"\u0144", 225),
         u"\u00e3": (u"\u0101", 227),
@@ -212,9 +215,10 @@ swaptables = {
         u"\u00f7": (u"\u0159", 247),
         u"\u00f8": (u"\u1e63", 248),
         u"\u00f9": (u"u\u0364", 249),
+        u"\u00fa": (u"u\u0366", 250),
         u"\u00fc": (u"\u016b", 252),
         u"\u0160": (u"\010c", 151),
-        u"\u2021": (u"\u0142", 135), # aus BSB 2257. CID-Konflikt?
+        u"\u2021": (u"\u0142", 135), # aus BSB 2257. CID-Konflikt? 
         u"\u2021": (u"\u0142", 130), # aus BSB 2015. CID-Konflikt?
     },
     "StGSonderItalic-SC750": {
@@ -248,13 +252,19 @@ swaptables = {
     },
     "StempelGaramondLTPro-Italic": {
         u"\u00e1": (u"\u00c1", 127),
+        u"\u016f": (u"u\u0366", 31),
     },
     "StempelGaramondLTPro-Roman": {
         u"\u016e": (u"U\u0366", 10),
+        u"\u016e": (u"U\u0366", 29), # aus BSB 2045
         u"\u016f": (u"u\u0366", 5), # aus BSB 2037
         u"\u016f": (u"u\u0366", 7), # aus BSB 2036
         u"\u016f": (u"u\u0366", 29),
-        u"\u016f": (u"u\u0366", 31),
+        u"\u016f": (u"u\u0366", 31), # aus BSB 2045
+    },
+    "StempelGrmnd-Roman": {
+        u"\u00b0":  (u"\u0366", 176),
+        u"\u00e5":  (u"a\u0366", 229),
     },
     "SwisSo-Italic": {
         u"\u0065": (u"\u0119", 101),
