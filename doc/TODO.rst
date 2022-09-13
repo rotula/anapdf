@@ -14,39 +14,10 @@ and, on the other hand, associates the same CID with different glyphs?
 CID 3 = small letter Omega (in italics) AND capital letter Omega (roman)
 CID 2 = small letter Omega (in italics) AND capital letter Delta (roman)
 
+- rotated pages and Hebrew characters in BSB 2253 & BSB 2254 (cf. ph)
 
 
 
-
-Transformation der von anapdf erzeugten [Band].xml anpassen (aoe, 2022-04-13):
-==============================================================================
-
-Im Bereich der römischen Seitenzahlen wird momentan in <page> der Wert von @label nur im Fall der ersten Seite ("I") korrekt eingetragen.
-Alle weiteren scheinen von der ersten arabischen Seitenzahl (ggf. über Null) heruntergezählt zu werden. 
-
-Zwei Beispiele: 
-
-(1) MGH Epp. 8,2 (BSB 2034) setzt im Editionsteil die Paginierung von Epp. 8,1 mit S. 229 fort, die Seiten der Einleitung (pp. II-VIII) sind in mgh_epp_8_2.xml als "222"-"228" gelabelt:
-
-<page id="1" bbox="0.000,0.000,538.583,751.181" rotate="0" label="I">
-...
-<page id="2" bbox="0.000,0.000,538.583,751.181" rotate="0" label="222">
-...
-<page id="8" bbox="0.000,0.000,538.583,751.181" rotate="0" label="228">
-...
-<page id="9" bbox="0.000,0.000,595.276,822.047" rotate="0" label="229">
-
-
-(2) MGH SS rer. Germ. 82 (BSB 2013) hat demgenüber eine "genuine", im Editionsteil mit "1" einsetzende arabische Paginierung. 
-Hier erhalten die im Band römisch gezählten Einleitungsseiten in mgh_ss_rer_germ_82.xml eine Minus-Zahl bzw. "0" als Wert von @label:
-
-<page id="1" bbox="0.000,0.000,419.528,643.465" rotate="0" label="I">
-...
-<page id="2" bbox="0.000,0.000,419.528,643.465" rotate="0" label="-14">
-...
-<page id="16" bbox="0.000,0.000,419.528,643.465" rotate="0" label="0">
-...
-<page id="17" bbox="0.000,0.000,419.528,643.465" rotate="0" label="1">
 
 
 Bugfix anapdf:
