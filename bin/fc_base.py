@@ -86,13 +86,17 @@ swaptables = {
     },
     "GriechischItalic": {
         u"\u0023": (u"\u1fce", 35),
+        u"\u002b": (u"\u1ffe", 43),
         u"\u0041": (u"\u0391", 65),
         u"\u0042": (u"\u0392", 66),
         u"\u0045": (u"\u0395", 69),
-        u"\u0047": (u"\u0393", 71), 
+        u"\u0047": (u"\u0393", 71),
+        u"\u0048": (u"\u0397", 72), 
         u"\u0049": (u"\u0399", 73),
+        u"\u004b": (u"\u039a", 75), 
         u"\u004c": (u"\u039b", 76),
         u"\u004d": (u"\u039c", 77),
+        u"\u004d": (u"\u1ff6", 212),  # Aus BSB 2247
         u"\u004e": (u"\u039d", 78),
         u"\u004f": (u"\u039f", 79),
         u"\u0053": (u"\u03a3", 83),
@@ -109,6 +113,7 @@ swaptables = {
         u"\u006a": (u"\u03c6", 106),
         u"\u006b": (u"\u03ba", 107),
         u"\u006c": (u"\u03bb", 108),
+        u"\u006d": (u"\u03bc", 109),  
         u"\u006e": (u"\u03bd", 110),
         u"\u006f": (u"\u03bf", 111),
         u"\u0070": (u"\u03c0", 112),
@@ -123,7 +128,7 @@ swaptables = {
         u"\u00b4": (u"\u0384", 180),
         u"\u00c9": (u"\u03ae", 201),
         u"\u00e1": (u"\u03ac", 225),
-        u"\u00ea": (u"\1fc6", 234),
+        u"\u00ea": (u"\u1fc6", 234),
         u"\u00ed": (u"\u03af", 237),
         u"\u00f6": (u"\u1f40", 246), 
         u"\u00fa": (u"\u03cd", 250),
@@ -131,7 +136,9 @@ swaptables = {
         u"\u2019": (u"\u0313", 146),
     },
     "GriechischMedium": {
+        u"\u0023": (u"\u1fce", 35),
         u"\u002a": (u"\u1fbf", 42),
+        u"\u002b": (u"\u1ffe", 43), 
         u"\u0041": (u"\u0391", 65),
         u"\u0042": (u"\u0392", 66),
         u"\u0044": (u"\u0394", 68),
@@ -148,11 +155,13 @@ swaptables = {
         u"\u004f": (u"\u039f", 79),
         u"\u0050": (u"\u03a0", 80),
         u"\u0051": (u"\u0398", 81),
+        u"\u0053": (u"\u03a3", 83),
         u"\u0054": (u"\u03a4", 84),
         u"\u0056": (u"\u03c2", 86),
         u"\u0058": (u"\u039e", 88),
         u"\u0061": (u"\u03b1", 97),
         u"\u0062": (u"\u03b2", 98),
+        u"\u0063": (u"\u03c7", 99),
         u"\u0064": (u"\u03b4", 100),
         u"\u0065": (u"\u03b5", 101),
         u"\u0066": (u"\u03c6", 102),
@@ -171,7 +180,11 @@ swaptables = {
         u"\u0074": (u"\u03c4", 116),
         u"\u0075": (u"\u03c5", 117),
         u"\u0077": (u"\u03c9", 119),
+        u"\u0079": (u"\u03c8", 121),
+        u"\u007a": (u"\u03b6", 122),
+        u"\u00a3": (u"\u1f10", 163),
         u"\u00c9": (u"\u03ae", 201),
+        u"\u00d4": (u"\u1ff6", 212),
         u"\u00e1": (u"\u03ac", 225),
         u"\u00e2": (u"\u1fb6", 226),
         u"\u00e9": (u"\u03ad", 233),
@@ -180,6 +193,7 @@ swaptables = {
         u"\u00ed": (u"\u03af", 237),
         u"\u00f2": (u"\u1f78", 242),
         u"\u00f3": (u"\u03cc", 243),
+        u"\u00fa": (u"\u03cd", 250),
         u"\u00fb": (u"\u1fe6", 251),
         u"\u00fc": (u"\u1f50", 252),
     },
@@ -266,7 +280,7 @@ swaptables = {
         u"\u00f9": (u"u\u0364", 249),
         u"\u00fa": (u"u\u0366", 250),
         u"\u00fc": (u"\u016b", 252),
-        u"\u0160": (u"\010c", 151),
+        u"\u0160": (u"\u010c", 151),
         u"\u2021": (u"\u0142", 135), # aus BSB 2257. CID-Konflikt? 
         u"\u2021": (u"\u0142", 130), # aus BSB 2015. CID-Konflikt?
     },
@@ -324,8 +338,20 @@ swaptables = {
     },
     "Symbol": {
         u"": (u"\u2192", 109),  # right arrow
+        u"\u0041": (u"\u0391", 33),  # Alpha
+        u"\u0047": (u"\u0393", 39),  # Gamma
+        u"\u0048": (u"\u0397", 40),  # Eta
+        u"\u0049": (u"\u0399", 41),  # Iota
+        u"\u004b": (u"\u039a", 43),  # Kappa
+        u"\u004c": (u"\u039b", 44),  # Lambda
+        u"\u004d": (u"\u039c", 45),  # My
         u"\u0051": (u"\u0398", 52),  # Theta
-        u"\u0077": (u"\u03c9", 31),  # Omega
+        u"\u0051": (u"\u0398", 49),  # Theta
+        u"\u0052": (u"\u03a1", 50),  # Rho
+        u"\u0053": (u"\u03a3", 51),  # Sigma
+        u"\u006a": (u"\u03c6", 74),  # phi
+        u"\u0077": (u"\u03c9", 31),  # omega
+        u"\u0398": (u"\u03a4", 52),  # Tau
     },
     "SymbolMT": {
         u"\u0021": (u"\u003e", 6), # Muss ich die Spitzklammer U+003e als &gt; codieren?
@@ -342,9 +368,8 @@ swaptables = {
         u"\u02db": (u"\u0105", 222), 
     },
     "TimesNewRomanPSMT": {
-        u"\u0065": (u"\u0119", 101),
-        u"\u00ad": (u"\u00ad", 3),
-        u"\u00b0": (u"y\u0366", 176), 
+        # u"\u0065": (u"\u0119", 101), Aus BSB 2037; macht aber z.B. in BSB 2246 Probleme
+        # u"\u00b0": (u"y\u0366", 176), Aus BSB 2016; macht aber z.B. in BSB 2246 Probleme 
         u"\u016e": (u"U\u0366", 291), # Ersetzung: U mit Ring > U mit übergeschr. o
         u"\u016f": (u"u\u0366", 157), # Ersetzung: u mit Ring > u mit übergeschr. o. Dopplung mit CID 292
         u"\u016f": (u"u\u0366", 292), # Ersetzung: u mit Ring > u mit übergeschr. o. Dopplung mit CID 157
@@ -395,12 +420,13 @@ swaptables = {
         u"\u00c7": (u"\u011e", 199),
         u"\u00e0": (u"\u0101", 224), 
         u"\u00e6": (u"\u011b", 230),
-        u"\u00f3": (u"\u014f", 243),
+        # u"\u00f3": (u"\u014f", 243),  Würde in eine verkettete Transformation führen
         u"\u00f7": (u"\u010c", 247),
         u"\u00fa": (u"u\u0366", 250),
         u"\u00fb": (u"\u016b", 251),
         u"\u00fd": (u"\u1e2a", 253),
         u"\u00fe": (u"\u011f", 254),
+        # u"\u014f": (u"u\u014d", 243), Wäre 2. Glied einer verketteten Transformation
         u"\u0152": (u"u\u0364", 140),
         u"\u0160": (u"\u015a", 138),
         u"\u0161": (u"\u010d", 154), # BSB 2020, 2031, 2929, 2258
@@ -413,16 +439,21 @@ swaptables = {
         u"\u0063": (u"\u0107", 67),
     },
     "TimesSonder-Roman": {
-        u"\u003e": (u"V\u0302", 62),
-        u"\u0045": (u"u0118", 69),
+        u"\u003e": (u"V\u0302", 62), 
+        u"\u0045": (u"\u0118", 69),
+        u"\u0047": (u"\u01e6", 71),
+        u"\u0048": (u"\u1e24", 72),
         u"\u0052": (u"R\u0305", 82),
+        u"\u0053": (u"\u1e62", 83),
         u"\u0056": (u"V\u0366", 86), # geändert aus V + Kringel (=u030a)
-        u"\u0062": (u"1e07", 98), 
+        u"\u0062": (u"\u1e07", 98),
+        u"\u0064": (u"\u1e05", 100),  
         u"\u0058": (u"\u25b2", -1),
         u"\u005a": (u"\u017d", 90),
         u"\u0063": (u"\u0107", 99),
         u"\u0065": (u"\u0119", 101),
         u"\u0067": (u"\u01e7", 103),
+        u"\u0068": (u"\u1e25", 104),
         u"\u0069": (u"\u012b", 1),
         u"\u0069": (u"\u012b", 105),
         u"\u006c": (u"\u0142", 108),
@@ -445,6 +476,9 @@ swaptables = {
         u"\u00a9": (u"W\u0366", 169),
         u"\u00ae": (u"c\u0304", 174),
         u"\u00b3": (u"e\u0323", 179), # geändert aus hart codiertem e mit Unterpunkt U+01B9
+        u"\u00bf": (u"\u1e2b", 191), 
+        u"\u00c3": (u"\u0100", 195),
+        u"\u00c4": (u"\u0120", 196),
         u"\u00c7": (u"c\u011e", 199), 
         u"\u00d2": (u"O\u036e", 210), # geändert aus O mit Caron
         u"\u00d3": (u"O\u0364", 211),
@@ -462,19 +496,21 @@ swaptables = {
         u"\u00ee": (u"\u01d0", 238),
         u"\u00f0": (u"r\u0364", -1),
         u"\u00f2": (u"o\u036e", 242),
-        u"\u00f3": (u"o\u014d", 243),
+        u"\u00f3": (u"\u014d", 243), 
         u"\u00f4": (u"\u01d2", -1),
         u"\u00f6": (u"o\u0364", 246),
         u"\u00f7": (u"\u010c", 247),
         u"\u00fa": (u"u\u0366", 250),
         u"\u00fb": (u"\u016b", 4), 
         u"\u00fb": (u"\u016b", 251),
+        u"\u00fd": (u"\u01e2a", 253),
         u"\u00ff": (u"g\u0304", 255),
         u"\u0131": (u"i\u0366", 7),
         u"\u0152": (u"u\u0364", 140),
         u"\u0161": (u"\u010d", 154),    
         u"\u0161": (u"\u010d", 157),    
         u"\u0178": (u"i\u0323", 159),
+        u"\u0192": (u"\u1e6f", 131),
         u"\u2020": (u"d\u0323", 134),  
         u"\u2122": (u"i\u036e", 146),  # (i with caron (U+01D0)?)
     },
@@ -485,6 +521,7 @@ swaptables = {
     "TimesSonder3": {
         u"\u002b": (u"t\u0304", 43),
         u"\u003e": (u"V\u0302", 62),
+        u"\u0054": (u"\u1e6c", 84),
         u"\u0056": (u"V\u0366", 86),
         u"\u0064": (u"d\u0364", 100),
         u"\u0066": (u"f\u0364", 102),
@@ -546,6 +583,7 @@ swaptables = {
     },
     "TimesSonder3-Italic": {
         u"\u0052": (u"\u0158", 82),
+        u"\u0054": (u"\u1e6c", 84),
         u"\u005a": (u"\u017b", 90),
         u"\u00a4": (u"\u0161", 130),
         u"\u00d0": (u"\u017c", 208),
@@ -553,134 +591,52 @@ swaptables = {
         u"\u00e5": (u"\u0105", 229),
         u"\u00e6": (u"\u011b", 230),
         u"\u00f7": (u"\u010c", 247),
-        u"\u201D": (u"\u0148", 148),
+        u"\u014f": (u"\u014d", 243),
+        u"\u201d": (u"\u0148", 148),
     },
     "TimesSonder4": {
         u"\u00f9": (u"u\u0365", 5),
     },
-    "TT Special": {
-        u"\u00a6": (u"\u00a0", 166),
-    },
-     "TT10DCCO00": { 
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-     "TT10DD4O00": { 
-        u"\u00e0": (u"o\u0105", 224),
-    },
-    "TT2387O00": {
-        u"\u00f4": (u"o\u036e", 244),
-    },
-    "TT2A27O00": { 
+    "TT Special": { 
         u"\u0023": (u"\u0042", 35),
-    },
-    "TT2A37O00": { 
-        u"\u201c": (u"\u0119", 141),
-    },
-    "TT31F6O00": {
-        u"\u0065": (u"\u0119", 101),
-        u"\u00e2": (u"\u0101", 226),  
-    },
-    "TT340O00": {
-        u"\u002b": (u"\u2329", 43),
-        u"\u002c": (u"\u232a", 44),  
-    },
-    "TT3CB1O00": { 
-        u"\u00e4": (u"a\u0364", 228),
-        u"\u00fc": (u"u\u0364", 252),  
-    },
-     "TT4653O00": {
-        u"\u006c": (u"\u0142", 108),
-        u"\u00e0": (u"\u0105", 224),
-        u"\u00e4": (u"a\u0364", 228),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT465AO00": {
+        # u"\u0028": (u"\u1F7B5", 40), Führt zu fehlerhafter Ersetzung von (
+        # u"\u002b": (u"\u2329", 43), Führt zu fehlerhafter Ersetzung von +
+        # u"\u002c": (u"\u232a", 44), Führt zu fehlerhafter Ersetzung von ,
+        # u"\u0045": (u"\u00ba", 69), Führt zu fehlerhafter Ersetzung von E
+        # u"\u0047": (u"\u01e6", 71), Führt zu fehlerhafter Ersetzung von G
+        # u"\u0048": (u"\u1e24", 72), Führt zu fehlerhafter Ersetzung von H
+        # u"\u0053": (u"\u015a", 83), Führt zu fehlerhafter Ersetzung von S
+        # u"\u0054": (u"\u1e6c", 84), Führt zu fehlerhafter Ersetzung von T
+        # u"\u0065": (u"\u0119", 101), Führt zu fehlerhafter Ersetzung von e
+        # u"\u0067": (u"\u01e7", 103), Führt zu fehlerhafter Ersetzung von g
+        # u"\u0068": (u"\u1e25", 104), Führt zu fehlerhafter Ersetzung von h
+        # u"\u0069": (u"\u012b", 105), Führt zu fehlerhafter Ersetzung von i
+        # u"\u006c": (u"\u0142", 108), Führt zu fehlerhafter Ersetzung von l
+        # u"\u0072": (u"\u0159", 114), Führt zu fehlerhafter Ersetzung von r
+        # u"\u0073": (u"\u1e63", 115), Führt zu fehlerhafter Ersetzung von s
+        # u"\u0074": (u"\u1e6d", 116), Führt zu fehlerhafter Ersetzung von t
+        # u"\u0076": (u"v\u0364", 118), Führt zu fehlerhafter Ersetzung von v
+        # u"\u0077": (u"w\u0364", 119), Führt zu fehlerhafter Ersetzung von w
+        u"\u00a2": (u"\u0121", 162),
+        u"\u00a6": (u"\u00a0", 166),
+        u"\u00b0": (u"\u00ba", 74),
         u"\u00bb": (u"\u0142", 187),
+        # u"\u00c4": (u"\u0120", 196), Führt zu fehlerhafter Ersetzung von Ä
         u"\u00d0": (u"\u015a", 208),
-    },
-     "TT4661O00": {
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT4976O00": {
-        u"\u00bb": (u"\u0142", 187),
-    },
-    "TT497DO00": { 
-        u"\u0045": (u"\u00ba", 69),
-    },
-    "TT4984O00": {
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT5845O00": {
-        u"\u0065": (u"\u0119", 101),
+        # u"\u00d6": (u"O\u0364", 214), Führt zu fehlerhafter Ersetzung von Ö
+        # u"\u00e0": (u"\u0105", 224), Führt zu fehlerhafter Ersetzung von à
+        # u"\u00e2": (u"\u0101", 226), Führt zu fehlerhafter Ersetzung von â
+        # u"\u00e4": (u"a\u0364", 228), Führt zu fehlerhafter Ersetzung von ä
         u"\u00eb": (u"e\u0364", 235),
-        u"\u00f4": (u"o\u036e", 244),
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fb": (u"u\u036e", 251),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-     "TT584CO00": { 
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-     "TT585EO00": { 
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT5865O00": { 
-        u"\u0045": (u"\u00ba", 69),
-    },
-    "TT5BA8O00": {
-    u"\u00b0": (u"\u00ba", 74),
-    },
-    "TT7F05O00": { 
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT7F0DO00": { 
-        u"\u0076": (u"v\u0364", 118),
-        u"\u0077": (u"w\u0364", 119),
-        u"\u00d6": (u"O\u0364", 214),
-        u"\u00e4": (u"a\u0364", 228),
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-     "TT7F14O00": {
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-     "TT7F1BO00": { 
-        u"\u0045": (u"\u00ba", 69),
-    },
-    "TT8589O00": { 
-      u"\u006c": (u"\u0142", 108),
-    },
-     "TT99FEO00": {
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT9A06O00": {
-        u"\u00f6": (u"o\u0364", 246),
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TT9A0DO00": {
-        u"\u00fc": (u"u\u0364", 252),
-    },
-    "TTA150O00": {
-        u"\u0053": (u"\u015a", 83),
-        u"\u006c": (u"\u0142", 108),
-    },
-    "TTA158O00": {
-        u"\u006c": (u"\u0142", 108),
-    },
-     "TTA15FO00": { 
-        u"\u0045": (u"\u00ba", 69),
-    },
-    "TTEA7O00": {
-        u"\u002b": (u"\u2329", 43),
-        u"\u002c": (u"\u232a", 44),  
+        # u"\u00f4": (u"o\u036e", 244), Führt zu fehlerhafter Ersetzung von ô
+        # u"\u00f6": (u"o\u0364", 246), Führt zu fehlerhafter Ersetzung von ö
+        # u"\u00fb": (u"u\u036e", 251), Führt zu fehlerhafter Ersetzung von û
+        # u"\u00fc": (u"u\u0364", 252), Führt zu fehlerhafter Ersetzung von ü
+        u"\u00fd": (u"\u1e2a", 253),
+        u"\u0105": (u"\u0101", 224),
+        u"\u0192": (u"\u1e6f", 134),
+        # u"\u201c": (u"\u0119", 141), Führt zu fehlerhafter Ersetzung von “
+        # u"\u2020": (u"\u1e0d", 129), Führt zu fehlerhafter Ersetzung von †
     },
     "Wingdings2": {
         u"\u00cb": (u"\u2020", 173),
