@@ -2,6 +2,36 @@
 TODO
 ****
 
+
+Abwägung für dmgh-Routine: Textextraktion mit PDFminer oder Mutool?
+===================================================================
+Im Zuge der anvisierten Weiterverarbeitung der retrodigitalisierten SuT-Bände stellt sich, auch mit Blick auf die dmgh-Routine insgesamt, 
+die Frage, ob mutool nicht die bessere Alternative zum PDFminer ist. 
+An Vorzügen bzw. Nachteilen ist bisher bei verschiedener Gelegenheit aufgefallen:
+
+Pro Mutool:
+- deutlich schnellere Extraktion
+- Weiterentwicklung in der community
+- ? Bildextraktion scheint in manchen Fällen ebenfalls besser mit mutool zu laufen
+- bessere, "intuitive" Erkennung von Textblöcken (insbes. Spalten) 
+	> könnte die metrics-Auszeichnung entbehrlich machen, könnte aber auch durch Parameter-Änderungen im PDF-Miner zu kompensieren sein
+- produizert NICHT den Fehler von mutool: als eigene textline verselbständigtes Komma im OCRisiertem Text
+	> vgl. MGH Studien und Texte 8, S. 121, Anm.app., Z. 7/8: Komma nach "ROBERT"
+- ? glyphname-Zuweisung läuft im PDFminer verschiedentlich schief (Versatz im Lesefluss oder im Alphabet)
+	> cf. TODO.txt zu PDFminer 
+
+
+Pro PDFMiner
+- liefert Schriftgruppenspezifikationen ("Times-RomanKLPÖLJ"), CID und Buchstabengrößen mit
+	> betrifft eher nicht die OCRisierten Bände, weil dort kein Zeichenaustausch nötig ist 
+- produziert NICHT den Fehler von Mutool: Einfügung von Binnenleerzeichen bei laufweiteangepasstem ORCisiertem Text 
+	> vgl. MGH Studien und Texte 8, S. 121, Anm.app., Z. 7: "R O B E R T" statt "ROBERT"
+
+
+
+===================
+
+
 - How is the CID used in font handling (correction, encoding)?
 - What does the ``fc_base.py`` do? Is it OK, if one input Unicode code point appears
   twice within a font in ``index.htm`` but with a different CID? (lower/upper case
