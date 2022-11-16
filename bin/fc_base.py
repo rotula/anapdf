@@ -135,6 +135,15 @@ swaptables = {
     "ATGarSoSC700":   {
         u"\u0045": (u"\u0118", 69),  
     },
+    "BLG-GaramondA":  {
+        u"\u0061": (u"\u0105", 97),    
+    },
+    "BLG-GaramondE":  {
+        u"\u0043": (u"\u0259", 67),   
+    },
+    "BLG-GaramondU":  {
+        u"\u0039": (u"u\u032f", 57),    
+    },
     "Greek":   {
         u"\u005e": (u"\u0311", 94),
         u"\u0063": (u"\u03c7", 99),
@@ -158,10 +167,11 @@ swaptables = {
         u"\u0049": (u"\u0399", 73),
         u"\u004b": (u"\u039a", 75), 
         u"\u004c": (u"\u039b", 76),
-        u"\u004d": (u"\u039c", 77),
+        u"\u004d": (u"\u039c", 77), 
         u"\u004d": (u"\u1ff6", 212),  # Aus BSB 2247
         u"\u004e": (u"\u039d", 78),
         u"\u004f": (u"\u039f", 79),
+        u"\u0050": (u"\u03a0", 80), 
         u"\u0053": (u"\u03a3", 83),
         u"\u0056": (u"\u03db", 86),
         u"\u0057": (u"\u03a9", 87),
@@ -184,6 +194,7 @@ swaptables = {
         u"\u0073": (u"\u03c3", 115),
         u"\u0074": (u"\u03c4", 116),
         u"\u0075": (u"\u03c5", 117),
+        u"\u0076": (u"\u1f14", 118), 
         u"\u0077": (u"\u03c9", 119),
         u"\u0078": (u"\u03be", 120),
         u"\u007a": (u"\u03b6", 122),
@@ -191,12 +202,14 @@ swaptables = {
         u"\u00b4": (u"\u0384", 180),
         u"\u00c9": (u"\u03ae", 201),
         u"\u00e1": (u"\u03ac", 225),
+        u"\u00e4": (u"\u1f00", 228),  
         u"\u00ea": (u"\u1fc6", 234),
         u"\u00ed": (u"\u03af", 237),
         u"\u00f6": (u"\u1f40", 246), 
         u"\u00fa": (u"\u03cd", 250),
-        u"\u00fb": (u"\u1fe6", 251),  
-        u"\u2019": (u"\u0313", 146),
+        u"\u00fb": (u"\u1fe6", 251),
+        u"\u1ff6": (u"\u039c", 77),   
+        u"\u2019": (u"\u0313", 146), 
     },
     "GriechischMedium": {
         u"\u0023": (u"\u1fce", 35),
@@ -271,8 +284,16 @@ swaptables = {
     "PSMT Special": { 
         u"": (u"\u0302", 26), # Hat das so seine Richtigkeit? Im Auge behalten!
     },
-    "SGSonder2Italic": { # in der index.htm ohne vorangestellte Buchstabengruppe geführt - ok?
+    "SGSonder2Italic": { # in der index.htm tw. ohne vorangestellte Buchstabengruppe geführt - ok?
          u"\u0055": (u"U\u0364", 85),
+         u"\u006f": (u"o\u0367", 111),  
+    },
+    "SGSonder2Roman": {
+         u"\u0055": (u"U\u0364", 85),
+         u"\u006f": (u"o\u0367", 111),
+         u"\u00d2": (u"O\u0367", 210),
+         u"\u00ea": (u"e\u0367", 234),
+         u"\u00ef": (u"i\u0364", 239),     
     },
     "Spezialzeichen": {
         u"\u0032": (u"\u25cb", -1),  # white circle
@@ -333,7 +354,7 @@ swaptables = {
         u"\u00fa": (u"u\u0366", 252), 
     },
     "StGSonderItalic": {
-        u"\u0045": (u"\u0118", 69),
+        u"\u0045": (u"\u0118", 69), 
         u"\u0047": (u"\u01e6", 71),
         u"\u0048": (u"\u1e24", 72),
         u"\u0053": (u"\u1e62", 83),
@@ -343,6 +364,7 @@ swaptables = {
         u"\u006e": (u"\u0148", 110),
         u"\u0074": (u"\u1e6d", 116),
         u"\u00a1": (u"\u017e", 161),
+        u"\u00a7": (u"\u015a", 167),
         u"\u00a9": (u"\u0106", 169),
         u"\u00b5": (u"\u015b", 181),
         u"\u00d3": (u"\u01d1", 211),
@@ -351,11 +373,16 @@ swaptables = {
         u"\u00df": (u"\u0143", 223),
         u"\u00e0": (u"\u01ce", 224),
         u"\u00e1": (u"\u0144", 225),
+        u"\u00e2": (u"\u0103", 226), 
         u"\u00e3": (u"\u0101", 227),
         u"\u00e7": (u"\u010d", 231),
         u"\u00ea": (u"\u011b", 234),
+        u"\u00eb": (u"\u0113", 235),  
         u"\u00ee": (u"\u012b", 238),
         u"\u00f0": (u"\u0161", 240),
+        u"\u00f2": (u"o\u0364", 242), 
+        u"\u00f4": (u"\u014f", 244), 
+        u"\u00f5": (u"\u014d", 245), 
         u"\u00f6": (u"\u0151", 246),
         u"\u00f7": (u"\u0159", 247),
         u"\u00f8": (u"\u1e63", 248),
@@ -371,7 +398,7 @@ swaptables = {
     },
     "StGSonderRoman": {
         u"\u0045": (u"\u0118", 69), 
-        u"\u0047": (u"\u01e6", 71),
+        u"\u0047": (u"\u01e6", 71), 
         u"\u0048": (u"\u1e24", 72),
         u"\u0050": (u"P\u0305", 80),
         u"\u0053": (u"\u1e62", 83),
@@ -387,12 +414,13 @@ swaptables = {
         u"\u00d8": (u"\u0158", 216),
         u"\u00da": (u"U\u0366", 218),
         u"\u00e3": (u"a\u0305", 227),
+        u"\u00e4": (u"a\u0364", 228),
         u"\u00e8": (u"e\u0364", 232),
         u"\u00ea": (u"e\u011b", 234),
-        u"\u00ee": (u"i\u0305", 238),
+        u"\u00ee": (u"i\u0305", 238), # i mit langem Kürzungsstrich, konkurriert aus inhaltl. Gründen mit i mit macron (Längezeichen)
         u"\u00f2": (u"o\u0364", 242),
         u"\u00f3": (u"\u01d2", 243),
-        u"\u00f5": (u"o\u0305", 245), 
+        u"\u00f5": (u"o\u0305", 245), # o mit langem Kürzungsstrich, konkurriert aus inhaltl. Gründen mit o mit macron (Längezeichen)
         u"\u00f7": (u"\u0159", 247),
         u"\u00f8": (u"\u1e63", 248),
         u"\u00f9": (u"u\u0364", 249),
@@ -416,7 +444,7 @@ swaptables = {
         u"\u016f": (u"u\u0366", 31), # aus BSB 2045
     },
     "StempelGrmnd-Roman": {
-        u"\u00b0":  (u"\u0366", 176),
+        # u"\u00b0":  (u"\u0366", 176), (probehalber deaktiviert, da bisweilen Ordnungzeichen männlich = U+00BA gemeint)
         u"\u00e5":  (u"a\u0366", 229),
     },
     "SwisSo-Italic": {
