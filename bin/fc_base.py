@@ -62,6 +62,7 @@ swaptables = {
     "ATGaramond-Italic": {
         # u"\u00b0": (u"\u00ba", 176), nur antizipiert
         # u"\u00c5": (u"A\u0366", 197), nur antizipiert
+        u"\u00b0": (u"\u00ba", 176), 
         u"\u00e5": (u"a\u0366", 229),  
     },
     "ATGarSo": {
@@ -156,8 +157,12 @@ swaptables = {
         u"\u0074": (u"\u03c4", 116),
         u"\u0077": (u"\u03c9", 119),
     },
-    "GriechischItalic": {
-        u"\u0023": (u"\u1fce", 35),
+    "GriechischBoldItalic": {
+        u"\u0061": (u"\u03b1", 97),
+        u"\u0062": (u"\u03b2", 98),
+    },
+    "GriechischItalic": {  
+        u"\u0023": (u"\u1fce", 35), 
         u"\u002b": (u"\u1ffe", 43),
         u"\u0041": (u"\u0391", 65),
         u"\u0042": (u"\u0392", 66),
@@ -208,6 +213,7 @@ swaptables = {
         u"\u00f6": (u"\u1f40", 246), 
         u"\u00fa": (u"\u03cd", 250),
         u"\u00fb": (u"\u1fe6", 251),
+        u"\u00fc": (u"\u1f50", 252), 
         u"\u1ff6": (u"\u039c", 77),   
         u"\u2019": (u"\u0313", 146), 
     },
@@ -281,6 +287,12 @@ swaptables = {
         u"072b": (u"u\u0364", 2317),
         u"1e98": (u"w\u0366", 1243),
     },
+    "OrigGarmndSo-Italic": {
+     u"0053": (u"\u015a", 83),  
+    },
+    "OrigGarmndSo-Italic-SC750": { 
+     u"004e": (u"\u0144", 78),   
+    },
     "PSMT Special": { 
         u"": (u"\u0302", 26), # Hat das so seine Richtigkeit? Im Auge behalten!
     },
@@ -290,7 +302,9 @@ swaptables = {
     },
     "SGSonder2Roman": {
          u"\u0055": (u"U\u0364", 85),
-         u"\u006f": (u"o\u0367", 111),
+         u"\u0067": (u"g\u0305", 103),
+         u"\u006d": (u"m\u0305", 109), # g mit Kürzungsstrich  
+         u"\u006f": (u"o\u0367", 111), # m mit Kürzungsstrich
          u"\u00d2": (u"O\u0367", 210),
          u"\u00ea": (u"e\u0367", 234),
          u"\u00ef": (u"i\u0364", 239),     
@@ -346,6 +360,9 @@ swaptables = {
         u"\u00f7": (u"\u0159", 247),
         u"\u2021": (u"\u0142", 130),
     },
+    "StGS4-Italic": {
+        u"\u0043": (u"\u010c", 67),  
+    },
     "StGS4-Roman": {
         u"\u00b0": (u"\u0366", 176), 
         u"\u00f2": (u"o\u0367", 242),
@@ -356,7 +373,7 @@ swaptables = {
     "StGSonderItalic": {
         u"\u0045": (u"\u0118", 69), 
         u"\u0047": (u"\u01e6", 71),
-        u"\u0048": (u"\u1e24", 72),
+        u"\u0048": (u"\u1e24", 72), 
         u"\u0053": (u"\u1e62", 83),
         u"\u005a": (u"\u017d", 90),
         u"\u0065": (u"\u0119", 101),
@@ -364,9 +381,11 @@ swaptables = {
         u"\u006e": (u"\u0148", 110),
         u"\u0074": (u"\u1e6d", 116),
         u"\u00a1": (u"\u017e", 161),
+        u"\u00a2": (u"\u0107", 162), 
         u"\u00a7": (u"\u015a", 167),
         u"\u00a9": (u"\u0106", 169),
         u"\u00b5": (u"\u015b", 181),
+        u"\u00ba": (u"\u015f", 186),  
         u"\u00d3": (u"\u01d1", 211),
         u"\u00d8": (u"\u0158", 216),
         u"\u00da": (u"U\u0366", 218),
@@ -383,12 +402,13 @@ swaptables = {
         u"\u00f2": (u"o\u0364", 242), 
         u"\u00f4": (u"\u014f", 244), 
         u"\u00f5": (u"\u014d", 245), 
-        u"\u00f6": (u"\u0151", 246),
+        u"\u00f6": (u"\u0151", 246), 
         u"\u00f7": (u"\u0159", 247),
         u"\u00f8": (u"\u1e63", 248),
         u"\u00f9": (u"u\u0364", 249),
         u"\u00fa": (u"u\u0366", 250),
         u"\u00fc": (u"\u016b", 252),
+        u"\u0153": (u"\u1e2b", 156), 
         u"\u0160": (u"\u010c", 151),
         u"\u2021": (u"\u0142", 135), # aus BSB 2257. CID-Konflikt? 
         u"\u2021": (u"\u0142", 130), # aus BSB 2015. CID-Konflikt?
@@ -397,7 +417,7 @@ swaptables = {
         u"\u00d8": (u"\u0158", 216),
     },
     "StGSonderRoman": {
-        u"\u0045": (u"\u0118", 69), 
+        u"\u0045": (u"\u0118", 69),  
         u"\u0047": (u"\u01e6", 71), 
         u"\u0048": (u"\u1e24", 72),
         u"\u0050": (u"P\u0305", 80),
@@ -442,6 +462,16 @@ swaptables = {
         u"\u016f": (u"u\u0366", 7), # aus BSB 2036
         u"\u016f": (u"u\u0366", 29),
         u"\u016f": (u"u\u0366", 31), # aus BSB 2045
+    },
+    "StempelGaramond-BoldItalic": {
+        u"\u00b0":  (u"\u00ba", 176),# Ordnungszeichen männlich 
+    },
+    "StempelGaramond-Italic": {
+        u"\u00b0":  (u"\u00ba", 176),# Ordnungszeichen männlich 
+    },
+    "StempelGaramond-Roman": {
+        u"\u002b":  (u"\u205c", 43),# Ordnungszeichen männlich 
+        u"\u00b0":  (u"\u00ba", 176),# Ordnungszeichen männlich 
     },
     "StempelGrmnd-Roman": {
         # u"\u00b0":  (u"\u0366", 176), (probehalber deaktiviert, da bisweilen Ordnungzeichen männlich = U+00BA gemeint)
