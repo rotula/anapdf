@@ -56,6 +56,9 @@ swaptables = {
         u"\u00c5": (u"A\u0366", 197), 
         u"\u00e5": (u"a\u0366", 229), 
     },
+    "ATGaramond-Antiqua": {
+        u"\u00b0":  (u"\u00ba", 176),# Ordnungszeichen männlich 
+    },
     "ATGaramond-Bold": {
         u"\u00e5": (u"a\u0366", 229),
     },
@@ -297,8 +300,13 @@ swaptables = {
         u"": (u"\u0302", 26), # Hat das so seine Richtigkeit? Im Auge behalten!
     },
     "SGSonder2Italic": { # in der index.htm tw. ohne vorangestellte Buchstabengruppe geführt - ok?
+         u"\u0047": (u"\u011e", 71),
+         u"\u0048": (u"\u1e2a", 72),
+         u"\u0054": (u"\u1e6c", 84),  
          u"\u0055": (u"U\u0364", 85),
-         u"\u006f": (u"o\u0367", 111),  
+         u"\u0064": (u"\u1e0d", 100),  	
+         u"\u006f": (u"o\u0367", 111),
+         u"\u007a": (u"\u1e93", 122),  	
     },
     "SGSonder2Roman": {
          u"\u0055": (u"U\u0364", 85),
@@ -377,15 +385,20 @@ swaptables = {
         u"\u0053": (u"\u1e62", 83),
         u"\u005a": (u"\u017d", 90),
         u"\u0065": (u"\u0119", 101),
+        u"\u0067": (u"\u01e7", 103), 	
         u"\u0068": (u"\u1e25", 104),
         u"\u006e": (u"\u0148", 110),
         u"\u0074": (u"\u1e6d", 116),
         u"\u00a1": (u"\u017e", 161),
-        u"\u00a2": (u"\u0107", 162), 
+        u"\u00a2": (u"\u0107", 162),
+        u"\u00a3": (u"\u011f", 163),  	
         u"\u00a7": (u"\u015a", 167),
         u"\u00a9": (u"\u0106", 169),
+        u"\u00ae": (u"\u1e6f", 174), 
         u"\u00b5": (u"\u015b", 181),
-        u"\u00ba": (u"\u015f", 186),  
+        u"\u00ba": (u"\u015f", 186),
+        u"\u00bf": (u"\u0121", 191),
+        u"\u00d0": (u"\u0100", 208),   
         u"\u00d3": (u"\u01d1", 211),
         u"\u00d8": (u"\u0158", 216),
         u"\u00da": (u"U\u0366", 218),
