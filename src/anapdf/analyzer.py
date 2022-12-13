@@ -119,10 +119,11 @@ class Analyzer(object):
         # pdf = PDFImagesDocument(self.pdffile)
         pdf = fitz.open(self.pdffile)
         # num_pages = pdf.count_pages()
-        num_pages = pdf.pageCount
+        # num_pages = pdf.pageCount
+        num_pages = pdf.page_count
         cnt = 1
         for idx in range(0, num_pages):
-            imdata = pdf.getPagePixmap(
+            imdata = pdf.get_page_pixmap(
                     idx,
                     matrix=fitz.Matrix(
                         float(self.resolution)/72,
