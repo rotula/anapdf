@@ -528,13 +528,14 @@ swaptables = {
     "TimesNewRomanPS-ItalicMT": {
         u"\u0092": (u"\u2019", 2), # Platzhalterzeichen zu einf. Anf.zeichen rechts. Zu speziell?
         u"\u00b0": (u"\u00ba", 74), # Gradzeichen zu Ordnungszeichen männlich. Zu speziell? 
-        u"\u0131": (u"\u00ed", 213),
+        u"\u0131": (u"\u00ed", 213), 
         u"\u016f": (u"u\u0366", 292),
         u"\u02db": (u"\u0105", 222), 
     },
     "TimesNewRomanPSMT": {
         # u"\u0065": (u"\u0119", 101), Aus BSB 2037; macht aber z.B. in BSB 2246 Probleme
         # u"\u00b0": (u"y\u0366", 176), Aus BSB 2016; macht aber z.B. in BSB 2246 Probleme 
+        u"\u00b0": (u"\u00ba", 176), # Ordnungszeichen männlich
         u"\u016e": (u"U\u0366", 291), # Ersetzung: U mit Ring > U mit übergeschr. o
         u"\u016f": (u"u\u0366", 157), # Ersetzung: u mit Ring > u mit übergeschr. o. Dopplung mit CID 292
         u"\u016f": (u"u\u0366", 292), # Ersetzung: u mit Ring > u mit übergeschr. o. Dopplung mit CID 157
@@ -558,7 +559,7 @@ swaptables = {
         u"\u006e": (u"n\u0323", 110),
     },
     "TimesSonder-Italic": {
-        u"\u0023": (u"\u0158", 35),
+        u"\u0023": (u"\u0158", 35), 
         u"\u0047": (u"\u01e6", 71),
         u"\u0048": (u"\u1e24", 72), 
         u"\u0053": (u"\u1e62", 83),
@@ -586,6 +587,7 @@ swaptables = {
         u"\u00e0": (u"\u0101", 224), 
         u"\u00e6": (u"\u011b", 230),
         # u"\u00f3": (u"\u014f", 243),  Würde in eine verkettete Transformation führen
+        u"\u00f6": (u"o\u0364", 246),
         u"\u00f7": (u"\u010c", 247),
         u"\u00fa": (u"u\u0366", 250),
         u"\u00fb": (u"\u016b", 251),
@@ -737,7 +739,7 @@ swaptables = {
         u"\u00f1": (u"n\u0364", 241),
         u"\u00f2": (u"o\u0366", 242),
         u"\u00f3": (u"o\u0367", 243),
-        u"\u00f4": (u"o\u01d2", 244),
+        u"\u00f4": (u"\u01d2", 244),
         u"\u00f5": (u"o\u0365", 245),
         u"\u00f6": (u"o\u0364", 246),
         u"\u00f9": (u"u\u0367", 249),
