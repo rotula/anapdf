@@ -53,7 +53,7 @@ CID 2 = small letter Omega (in italics) AND capital letter Delta (roman)
 Bugfix anapdf:
 ==============
 Im Fall von BSB 2256 = MGH Hebr. Texte 2,2 bricht anapdf mit folgender Fehlermeldung ab:
-fonts/index.htm: anapf scheint hier auf ein Problem gestoßen zu sein: einige Zeichen werden nicht als Snippet angezeigt, weswegen eine Prüfung nicht möglich ist. Fehlermeldung:
+fonts/index.htm: anapdf scheint hier auf ein Problem gestoßen zu sein: einige Zeichen werden nicht als Snippet angezeigt, weswegen eine Prüfung nicht möglich ist. Fehlermeldung:
 
 Traceback (most recent call last):
   File "C:\ProgramData\Anaconda3\Scripts\anapdf-script.py", line 33, in <module>
@@ -81,10 +81,17 @@ Im Fall von (z.B.?) BSB 2044 und 2053 extrahiert anapdf offenbar Text, der in de
 Beispiele:
 
 - BSB 2044, S. (II) = img 00002: Überrest: "Konstanzer Domkapitels", "Teil 1" 
+	>> behoben
 - BSB 2044, S. (III) = img 00003: Überrest: "Konstanzer Domkapitels", "Teil 1"), 
+	>> behoben
 - BSB 2044, S. 5 = img 000037: Dublette: "Graphisches Lagenschema vor der Restaurierung"; Überrest/Dublette mit S. 6: "Graphisches Lagenschema nach der Restaurierung (2008) gemäß der (korrigierten) Rekonstruktion von Schmid"
+	>> nicht behoben
 - BSB 2044, S. 6 = img 000038: Dublette: "Älteres Gedenkbuch"; Dublette: "Lose Blätter"; Dublette: "Nonantola-Doppelblatt"
-- BSB 2053, S. XII = img 000012: Dublette: "Inhaltsverzeichnis"/"Inhaltsverzeichnis"
+	>> nicht behoben
+- BSB 2053, S. XII = img 000012: Dubletten: "XII"/"XII" und "INHALTSVERZEICHNIS"/"Inhaltsverzeichnis"
+	>> nicht behoben
+- BSB 2243: S. 577 = img 000007 und S. 781 = img 00211 gibt/gab es jw. ein "blindes" (und funktionsloses) "M"
+	>> behoben
 
 
 
