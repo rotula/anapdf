@@ -77,20 +77,27 @@ SystemError: tile cannot extend outside image
 
 Optimierung anapdf:
 ==================
-Im Fall von (z.B.?) BSB 2044 und 2053 extrahiert anapdf offenbar Text, der in der PDF als Ergebnis der InDesign-Bearbeitung als Überrest oder Dublette vorhanden, aber nicht sichtbar ist (transparente Farbe?). 
+Im Fall von (z.B.?) BSB 2044 und 2053 extrahiert anapdf offenbar Text,
+der in der PDF als Ergebnis der InDesign-Bearbeitung als Überrest oder
+Dublette vorhanden, aber nicht sichtbar ist (transparente Farbe?). 
 Beispiele:
 
 - BSB 2044, S. (II) = img 00002: Überrest: "Konstanzer Domkapitels", "Teil 1" 
 	>> behoben
 - BSB 2044, S. (III) = img 00003: Überrest: "Konstanzer Domkapitels", "Teil 1"), 
 	>> behoben
-- BSB 2044, S. 5 = img 000037: Dublette: "Graphisches Lagenschema vor der Restaurierung"; Überrest/Dublette mit S. 6: "Graphisches Lagenschema nach der Restaurierung (2008) gemäß der (korrigierten) Rekonstruktion von Schmid"
+- BSB 2044, S. 5 = img 000037: Dublette: "Graphisches Lagenschema vor der
+  Restaurierung"; Überrest/Dublette mit S. 6: "Graphisches Lagenschema nach der
+  Restaurierung (2008) gemäß der (korrigierten) Rekonstruktion von Schmid"
 	>> nicht behoben
-- BSB 2044, S. 6 = img 000038: Dublette: "Älteres Gedenkbuch"; Dublette: "Lose Blätter"; Dublette: "Nonantola-Doppelblatt"
+- BSB 2044, S. 6 = img 000038: Dublette: "Älteres Gedenkbuch"; Dublette: "Lose
+  Blätter"; Dublette: "Nonantola-Doppelblatt"
 	>> nicht behoben
-- BSB 2053, S. XII = img 000012: Dubletten: "XII"/"XII" und "INHALTSVERZEICHNIS"/"Inhaltsverzeichnis"
+- BSB 2053, S. XII = img 000012: Dubletten: "XII"/"XII" und
+  "INHALTSVERZEICHNIS"/"Inhaltsverzeichnis"
 	>> nicht behoben
-- BSB 2243: S. 577 = img 000007 und S. 781 = img 00211 gibt/gab es jw. ein "blindes" (und funktionsloses) "M"
+- BSB 2243: S. 577 = img 000007 und S. 781 = img 00211 gibt/gab es jw. ein
+  "blindes" (und funktionsloses) "M"
 	>> behoben
 
 
