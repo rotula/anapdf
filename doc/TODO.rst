@@ -31,7 +31,11 @@ Pro PDFMiner
 
 ===================
 
-
+- When parsing index.htm for font correction, do not eliminate spaces in
+  replacement characters (fontenc.py)
+- Handling of smallcaps: If styles with smallcaps are normalized,
+  keep an eye on the letter sizes and adjust capitalization accordingly,
+  see BSB 2262 Font. iur. 17, p. 23 note 85 ("deshusses")
 - How is the CID used in font handling (correction, encoding)?
 - What does the ``fc_base.py`` do? Is it OK, if one input Unicode code point appears
   twice within a font in ``index.htm`` but with a different CID? (lower/upper case
