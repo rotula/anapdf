@@ -39,6 +39,14 @@ Pro PDFMiner
   twice within a font in ``index.htm`` but with a different CID? (lower/upper case
   characters in some fonts) How to do this in ``fc_base.py``?
 
+- There seems to be another problem with the font correction mechanism:
+  In ``fc_base.py``, when we re-encode a font, we use the ``font.cid2unicode``
+  as the base dictionary for the no-op-correction, but we introduce the correction
+  into ``font.unicode_map``. Yet, those two tables can differ under certain
+  circumstances. At first glance it seems that one of the two tables takes into
+  account some kerning information, thus, sometimes CID 46 is rendered as just
+  a period and in the other table as a space followed by a period.
+
 - aoe: How is it possible that the "Symbol" font in BSB 66356 has two CIDs (CID 2, CID 3) for the same glyph (small letter Omega in italics), 
 and, on the other hand, associates the same CID with different glyphs? 
 CID 3 = small letter Omega (in italics) AND capital letter Omega (roman)
