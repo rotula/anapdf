@@ -111,7 +111,8 @@ def main():
         args.pdffile,
         fontencfile=args.fontencfile,
         font_correctors=font_correctors,
-        default_font_size=basesize
+        default_font_size=basesize,
+        replace_soft_hyphen=True
     )
     conv.convert(args.stop_after)
     if args.output == "-":

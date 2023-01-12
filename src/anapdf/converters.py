@@ -60,6 +60,9 @@ class TEIConverter(Converter):
     font_correctors = None  # list of font correctors
     default_font_size = None  # a base font size to be assumed
 
+    replace_soft_hyphen = True  # Always replace soft hyphens with hard
+                                  # hyphens.
+
     MIXED = 0  # mixed wordsize: at least two different sizes detected
     CLEAN = 1  # clean wordsize: every letter of same size
 
@@ -72,7 +75,8 @@ class TEIConverter(Converter):
             "application/xml\" schematypens=\"http://purl.oclc."\
             "org/dsdl/schematron\"?>"
 
-    def __init__(self, sourcefile, fontencfile=None, font_correctors=None, default_font_size=None):
+    def __init__(self, sourcefile, fontencfile=None, font_correctors=None,
+                 default_font_size=None, replace_soft_hyphen=True):
         if not os.path.isfile(sourcefile):
             raise ConverterError("File not found: {}".format(str(sourcefile)))
         if sourcefile.endswith(".xml"):
@@ -95,6 +99,7 @@ class TEIConverter(Converter):
                 self.font_correctors.append(fc)
         self.styles = {}
         self.default_font_size = default_font_size
+        self.replace_soft_hyphen = replace_soft_hyphen
 
     def add_style(self, style):
         """Add a style to the dictionary, return style id."""
@@ -420,28 +425,32 @@ class TEIConverter(Converter):
             style.size = size
             # base = self.get_base(c.get("bbox", None))
             base = self.get_base(c.get("origin", None))
-            if self.repltable is not None:
-                fonttable = self.repltable.get(fontname)
-                if fonttable is not None:
-                    cid = int(c.get("cid", "-1"))
-                    foundchar = (c.text or "").strip()
-                    try:
-                        replchar, replstyles = \
-                                fonttable["repl"][(foundchar, cid)]
-                        # apply replstyles
-                        for r in replstyles:
-                            if r == "sc":
-                                style.smallcaps = True
-                                b_generic_smallcaps = True
-                            elif r == "bold":
-                                style.bold = True
-                            elif r == "italics":
-                                style.italics = True
-                            else:
-                                print(("Unknown style: {}".format(r)))
-                    except KeyError:
-                        # no special style or replacement needed
-                        pass
+            # special treatment of soft hyphen
+            if self.replace_soft_hyphen and replchar == u"\u00ad":
+                    replchar = u"-"
+            else:
+                if self.repltable is not None:
+                    fonttable = self.repltable.get(fontname)
+                    if fonttable is not None:
+                        cid = int(c.get("cid", "-1"))
+                        foundchar = (c.text or "").strip()
+                        try:
+                            replchar, replstyles = \
+                                    fonttable["repl"][(foundchar, cid)]
+                            # apply replstyles
+                            for r in replstyles:
+                                if r == "sc":
+                                    style.smallcaps = True
+                                    b_generic_smallcaps = True
+                                elif r == "bold":
+                                    style.bold = True
+                                elif r == "italics":
+                                    style.italics = True
+                                else:
+                                    print(("Unknown style: {}".format(r)))
+                        except KeyError:
+                            # no special style or replacement needed
+                            pass
             # superscript, subscript
             if base > (self.current_base + 2.0) or rise > 2.0:
                 style.valign = "super"
