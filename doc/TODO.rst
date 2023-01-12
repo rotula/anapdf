@@ -38,8 +38,6 @@ Pro PDFMiner
 - What does the ``fc_base.py`` do? Is it OK, if one input Unicode code point appears
   twice within a font in ``index.htm`` but with a different CID? (lower/upper case
   characters in some fonts) How to do this in ``fc_base.py``?
-- How does PDF, how does PDFMiner etc. deal with soft hyphens?
-	>>> aoe: cf. git\anapdf\doc\soft-hyphen.txt
 
 - aoe: How is it possible that the "Symbol" font in BSB 66356 has two CIDs (CID 2, CID 3) for the same glyph (small letter Omega in italics), 
 and, on the other hand, associates the same CID with different glyphs? 
