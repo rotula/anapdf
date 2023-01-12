@@ -23,7 +23,7 @@ HTML_HEAD = u"""\
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 <title>Fonts</title>
-<style>
+<style type="text/css">
 td {
   font-size:36pt;
   vertical-align:baseline;
@@ -271,7 +271,7 @@ class Analyzer(object):
                 height = int((bbox[3] - bbox[1])/72*self.resolution)
                 outfile.write(u"<tr>\n".encode("UTF-8"))
                 outfile.write((u"<td class=\"" + letterstyle + "\">" + self._escape(char[0]) + "</td>\n").encode("UTF-8"))
-                outfile.write((u"<td><img src=\"pic/outpic").encode("UTF-8"))
+                outfile.write((u"<td><img alt=\"outpic%d\" src=\"pic/outpic" % fonts[font][char]["img"]).encode("UTF-8"))
                 outfile.write((u"%d.jpg\"" % fonts[font][char]["img"])\
                         .encode("UTF-8"))
                 outfile.write((u" width=\"%d\" " % width).encode("UTF-8"))
@@ -285,7 +285,7 @@ class Analyzer(object):
                         for x in fonts[font][char]["linebox"].split(",")]
                 linewidth = int((linebox[2] - linebox[0])/72*self.resolution)/3
                 lineheight = int((linebox[3] - linebox[1])/72*self.resolution)/3
-                outfile.write((u"<td><img src=\"pic/linepic").encode("UTF-8"))
+                outfile.write((u"<td><img alt=\"linepic%d\" src=\"pic/linepic" % fonts[font][char]["img"]).encode("UTF-8"))
                 outfile.write((u"%d.jpg\"" % fonts[font][char]["img"])\
                         .encode("UTF-8"))
                 outfile.write((u" width=\"%d\" " % linewidth).encode("UTF-8"))
