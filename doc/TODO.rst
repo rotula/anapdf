@@ -31,8 +31,6 @@ Pro PDFMiner
 
 ===================
 
-- When parsing index.htm for font correction, do not eliminate spaces in
-  replacement characters (fontenc.py)
 - Handling of smallcaps: If styles with smallcaps are normalized,
   keep an eye on the letter sizes and adjust capitalization accordingly,
   see BSB 2262 Font. iur. 17, p. 23 note 85 ("deshusses")

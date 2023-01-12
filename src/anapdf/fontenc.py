@@ -30,8 +30,16 @@ def read(filename):
             table = table.getnext()
         assert(table.tag == "table")
         for tr in table.xpath("./tr"):
-            foundchar = (tr[0].text or "").strip()
-            replchar = (tr[2].text or "").strip()
+            foundchar = tr[0].text or ""
+            if " " in foundchar and foundchar.strip() == "":
+                foundchar = " "
+            else:
+                foundchar = foundchar.strip()
+            replchar = tr[2].text or ""
+            if " " in replchar and replchar.strip() == "":
+                replchar = " "
+            else:
+                replchar = replchar.strip()
             cid = (tr[3].text or "").strip()
             if cid:
                 cid = int(cid[cid.find(":")+1:].strip())

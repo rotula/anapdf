@@ -7,6 +7,8 @@ Changelog for anapdf
 
 - BUGFIX: remove invalid ``label`` attribute from ``div`` in TEIConverter
 - BUGFIX: Font extraction: create valid HTML in ``index.htm``
+- BUGFIX: When parsing index.htm for font correction, do not eliminate
+  spaces in replacement characters (fontenc.py)
 - FEATURE: allow skipping of font extraction 
 - FEATURE: allow output filename for ``anapdf``
 - FEATURE: integrate pic number in index.htm
