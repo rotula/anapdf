@@ -13,6 +13,7 @@ Changelog for anapdf
 - FEATURE: allow output filename for ``anapdf``
 - FEATURE: integrate pic number in index.htm
 - FEATURE: allow for removal of soft hyphens
+- FEATURE: remove color attributes from PDFMiner output
 
 0.4.3 (2022-04-06)
 ==================

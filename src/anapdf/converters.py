@@ -545,6 +545,9 @@ class TEIConverter(Converter):
             xmlhelper.delat(c, "origin")
             xmlhelper.delat(c, "rise")
             xmlhelper.delat(c, "glyphname")
+            xmlhelper.delat(c, "color")
+            xmlhelper.delat(c, "ncolor")
+            xmlhelper.delat(c, "scolor")
             c.tag = "{{{}}}c".format(tei)
             # Could still be a smallcaps word, all letters are
             # upper case, but some are smaller than wordsize.
