@@ -9,6 +9,10 @@ Changelog for anapdf
 - BUGFIX: Font extraction: create valid HTML in ``index.htm``
 - BUGFIX: When parsing index.htm for font correction, do not eliminate
   spaces in replacement characters (fontenc.py)
+- BUGFIX: Deal with ``<g>`` tags inside ``<text>``. Now, to get the content
+  of a character element, we always need to call a subroutine. If this takes
+  too much time, we need to find another way to deal with these cases in
+  advance.
 - FEATURE: allow skipping of font extraction
 - FEATURE: allow output filename for ``anapdf``
 - FEATURE: integrate pic number in index.htm

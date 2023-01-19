@@ -281,6 +281,28 @@ class TEIConverter(Converter):
         ret.text = "\n"
         return ret
 
+    def _get_text_content(self, text):
+        ret = []
+        ret.append((text.text or u""))
+        for child in text:
+            if child.tag == "g":
+                value = child.get("value")
+                try:
+                    value = int(value)
+                except:
+                    print((u"Value '{}' not supported, must be integer."\
+                        .format(value)))
+                if value == 0:
+                    ret.append(u" ")
+                elif value == 9:
+                    ret.append(u" ")
+                else:
+                    print((u"Unsupported control character (<g value='{}'>)".format(value)))
+            else:
+                print((u"Unexpected element {}".format(child.tag)))
+            ret.append((child.tail or u""))
+        return "".join(ret)
+
     def deal_with_textline(self, textline):
         """Convert a line"""
         # Most importantly, we have to build words.
@@ -293,10 +315,12 @@ class TEIConverter(Converter):
         sizes = {}
         for e in textline:
             if e.tag == "text":
-                txt = (e.text or "")
+                # txt = (e.text or "")
+                txt = self._get_text_content(e)
                 if txt == "":
                     print((u"Empty text in line:\n  {}".format(
                         xmlhelper.get_text(textline)).encode("UTF-8")))
+                    xmlhelper.delete(e)
                 elif txt.strip() == "":
                     # whitespace
                     if seg is not None:
