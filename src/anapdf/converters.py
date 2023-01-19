@@ -133,6 +133,9 @@ class TEIConverter(Converter):
         Args:
             stop_after(int): stop after n pages, leave empty to process all
         """
+        # @@@Experimental: preflight for special characters
+        # (<g>)
+        self._handle_glyphs()
         body = self.doc.getroot()
         body.tag = "{{{}}}body".format(tei)
         tei_header = self.make_tei_header()
@@ -223,6 +226,16 @@ class TEIConverter(Converter):
         # try to cleanup namespaces
         et.cleanup_namespaces(self.teidoc)
         return
+
+    def _handle_glyphs(self):
+        dellist = []
+        for g in self.doc.iter("g"):
+            text = g.getparent()
+            txt = self._get_text_content(text)
+            text.text = txt
+            dellist.append(g)
+        for g in dellist:
+            xmlhelper.delete(g)
 
     def deal_with_page(self, page):
         """Convert a single page"""
@@ -315,8 +328,8 @@ class TEIConverter(Converter):
         sizes = {}
         for e in textline:
             if e.tag == "text":
-                # txt = (e.text or "")
-                txt = self._get_text_content(e)
+                txt = (e.text or "")
+                # txt = self._get_text_content(e)
                 if txt == "":
                     print((u"Empty text in line:\n  {}".format(
                         xmlhelper.get_text(textline)).encode("UTF-8")))
