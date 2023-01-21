@@ -59,6 +59,8 @@ class TEIConverter(Converter):
     wordcount = 0  # current word in line
     font_correctors = None  # list of font correctors
     default_font_size = None  # a base font size to be assumed
+    g_list = None  # a list of all glyph elements, they need
+                   # some preprocessing
 
     replace_soft_hyphen = True  # Always replace soft hyphens with hard
                                   # hyphens.
@@ -80,13 +82,22 @@ class TEIConverter(Converter):
         if not os.path.isfile(sourcefile):
             raise ConverterError("File not found: {}".format(str(sourcefile)))
         if sourcefile.endswith(".xml"):
-            self.doc = et.parse(sourcefile)
+            self.g_list = []
+            context = et.iterparse(sourcefile, tag=["g", "pages"])
+            for _, element in context:
+                if element.tag == "g":
+                    self.g_list.append(element)
+            self.doc = element.getroottree()
         elif sourcefile.endswith(".pdf"):
             self.doc = et.fromstring(self._get_xml_data(sourcefile))\
                     .getroottree()
         else:
             raise ConverterError("{} appears to be neither XML nor PDF."\
                     .format(str(sourcefile)))
+        if self.g_list is None:
+            self.g_list = []
+            for g in self.doc.iter("g"):
+                self.g_list.append(g)
         self.sourcefile = sourcefile
         if fontencfile:
             if not os.path.isfile(fontencfile):
@@ -228,13 +239,11 @@ class TEIConverter(Converter):
         return
 
     def _handle_glyphs(self):
-        dellist = []
-        for g in self.doc.iter("g"):
+        for g in self.g_list:
             text = g.getparent()
             txt = self._get_text_content(text)
             text.text = txt
-            dellist.append(g)
-        for g in dellist:
+        for g in self.g_list:
             xmlhelper.delete(g)
 
     def deal_with_page(self, page):
