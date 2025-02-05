@@ -2,7 +2,7 @@
 Changelog for anapdf
 ********************
 
-0.4.4 (@@@@-@@-@@)
+0.5.0 (2025-02-05)
 ==================
 
 - BUGFIX: remove invalid ``label`` attribute from ``div`` in TEIConverter
