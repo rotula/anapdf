@@ -100,8 +100,12 @@ def main():
         logging.basicConfig(level=logging.WARNING)
     font_correctors = []
     if args.font_corrector_filename:
-        import imp
-        fc_loader = imp.load_source("fc_loader", args.font_corrector_filename)
+        import importlib.util
+        import sys
+        spec = importlib.util.spec_from_file_location('fc_loader', args.font_corrector_filename)
+        fc_loader = importlib.util.module_from_spec(spec)
+        sys.modules['fc_loader'] = fc_loader
+        spec.loader.exec_module(fc_loader)
         font_correctors = fc_loader.fc_loader()
     if args.basesize != 0.0:
         basesize = args.basesize
