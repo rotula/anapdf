@@ -6,7 +6,7 @@ Analyze PDF files
 
 __all__ = ["Analyzer", "PDFAnalyzerError",
         "TEIConverter"]
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 from .analyzer import Analyzer
 from .analyzer import PDFAnalyzerError
