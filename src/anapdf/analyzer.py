@@ -78,6 +78,7 @@ class Analyzer(object):
     b_make_images = True
     b_extract_xml_data = True
     b_extract_fonts = True
+    b_cropbox_correction = True
 
     def __init__(self, **kwargs):
         self.pdffile = kwargs.get("pdffile")
@@ -104,6 +105,7 @@ class Analyzer(object):
             for fc in font_correctors:
                 self.font_correctors.append(fc)
         self.scales = kwargs.get("scales", (100.0, 100.0))
+        self.b_cropbox_correction = kwargs.get("cropbox_correction", True)
 
     def analyze(self):
         """Start the program suite"""
@@ -440,4 +442,35 @@ class Analyzer(object):
         infile.close()
         device.close()
         outfp.close()
+        # adjust for differences between MediaBox and CropBox?
+        if self.b_cropbox_correction:
+            doc = et.parse(self.xmlfile)
+            for page in doc.getroot():
+                if "cropbox" in page.attrib:
+                    mx0, my0, mx1, my1 = [
+                        float(x.strip())
+                        for x in page.get("bbox", "0,0,0,0").split(",")]
+                    cx0, cy0, cx1, cy1 = [
+                        float(x.strip())
+                        for x in page.get("cropboxraw").split(",")]
+                    xdiff = mx0 - cx0
+                    ydiff = my0 - cy0
+                    page.set("bbox", page.get("cropbox", ""))
+                    for e in page.iterdescendants():
+                        self.adjust_coords(e, xdiff, ydiff)
+            with open(self.xmlfile, "wb") as outfile:
+                outfile.write(et.tostring(doc, encoding="UTF-8"))
 
+    def adjust_coords(self, e, xdiff, ydiff):
+        if "bbox" in e.attrib:
+            x0, y0, x1, y1 = [float(x.strip()) for x in e.get("bbox").split(",")]
+            x0 += xdiff
+            y0 += ydiff
+            x1 += xdiff
+            y1 += ydiff
+            e.set("bbox", "%.3f,%.3f,%.3f,%.3f" % (x0, y0, x1, y1))
+        if "origin" in e.attrib:
+            x0, y0 = [float(x.strip()) for x in e.get("origin").split(",")]
+            x0 += xdiff
+            y0 += ydiff
+            e.set("origin", "%.3f,%.3f" % (x0, y0))

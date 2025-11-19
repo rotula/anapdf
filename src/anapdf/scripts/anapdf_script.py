@@ -105,6 +105,13 @@ def main():
             default=100.0,
             type=float,
             dest="vert")
+    parser.add_argument(
+            "-b",
+            "--skip-cropboxcorrection",
+            help=u"skip cropbox correction",
+            default=True,
+            action="store_false",
+            dest="cropbox_correction")
     args = parser.parse_args()
     if args.b_debug:
         logging.basicConfig(level=logging.DEBUG)

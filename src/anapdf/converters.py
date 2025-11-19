@@ -212,6 +212,8 @@ class TEIConverter(Converter):
             xmlhelper.delat(page, "rotate")
             xmlhelper.delat(page, "bbox")
             xmlhelper.delat(page, "label")
+            xmlhelper.delat(page, "cropbox")
+            xmlhelper.delat(page, "cropboxraw")
             # correct indentation
             try:
                 self.current_page_surface[-1].tail = "\n "
