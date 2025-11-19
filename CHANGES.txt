@@ -2,6 +2,12 @@
 Changelog for anapdf
 ********************
 
+0.6.0 (@@@@-@@-@@)
+==================
+
+- UPDATE: Use ``importlib`` instead of ``imp`` (which is deprecated) for
+  font corrector loading
+
 0.5.0 (2025-02-05)
 ==================
 
