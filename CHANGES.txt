@@ -7,6 +7,8 @@ Changelog for anapdf
 
 - UPDATE: Use ``importlib`` instead of ``imp`` (which is deprecated) for
   font corrector loading
+- BUGFIX: Delete some more color attributes from XML output of TEI
+  converter
 
 0.5.0 (2025-02-05)
 ==================
