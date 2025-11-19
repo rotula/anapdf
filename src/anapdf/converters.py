@@ -596,6 +596,8 @@ class TEIConverter(Converter):
             xmlhelper.delat(c, "color")
             xmlhelper.delat(c, "ncolor")
             xmlhelper.delat(c, "scolor")
+            xmlhelper.delat(c, "scolorant")
+            xmlhelper.delat(c, "ncolorant")
             c.tag = "{{{}}}c".format(tei)
             # Could still be a smallcaps word, all letters are
             # upper case, but some are smaller than wordsize.
